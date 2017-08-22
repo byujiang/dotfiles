@@ -1,6 +1,6 @@
 #!/bin/bash -
 
-set -o
+set -x
 
 current_path=`pwd -P`
 
