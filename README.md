@@ -1,4 +1,4 @@
-## config
+# dotfiles
 This repo contains many configuration file for common programs, which may be useful to you.
 
 ----------
