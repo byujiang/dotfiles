@@ -1,0 +1,13 @@
+{
+	"server":"::",
+	"server_port":8000,
+	"local_address":"127.0.0.1",
+	"port_password":{
+		"8800":"password2",
+		"8801":"password1"
+	},
+	"timeout":300,
+	"method":"aes-256-cfb",
+	"fast_open":false,
+	"workers":1
+}

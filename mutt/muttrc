@@ -1,0 +1,73 @@
+# Sendmail Service
+###########################################################
+set sendmail="/usr/bin/msmtp"
+set realname="byujiang"		# Your realname
+set charset=UTF-8		# Char encodings
+set locale=zh_CN.UTF-8	# locales
+# hook charset
+charset-hook gb18030 gb18030
+charset-hook gb2312 gb2312
+charset-hook GB2312 GB2312
+charset-hook big5 big5
+charset-hook !UTF-8 gbk
+###########################################################
+set folder=~/Mail/  	# Mailbox root directory
+set tmpdir=~/.mutt/tmp	# tmp directory
+set mbox_type=Maildir	# Mail
+set spoolfile=~/Mail/inbox/
+set mbox=+inbox			# mbox(~/Mail/inbox)
+set record=+sent		# Save sent mail in sent(~/Mail/sent)
+set postponed=+postponed
+set move=yes
+set quit=ask-yes		# Quit confirmation
+set timeout=600			# Shortcut timeout
+
+###########################################################
+## Alternate mail-address
+alternates "xx@xx|xx@xx|xx@xx|xx@xx"
+auto_view text/html		# View html-mail better
+set editor="vim"		# Message Editor
+set edit_headers=no		# Edit mail header in editor or not
+
+## From Configuration.
+set envelope_from=yes
+set encode_from=yes
+set use_from=yes		# Automatically generate from address
+set from=	# Default from address
+
+## Reply Configuration
+set reply_to=yes		# Using Original reply-to especially in a mail list.
+set reverse_name=yes	# Reply with the same mail address
+set header=no			#Don't include original letter when replying
+set include=no			# Reply without original mail content
+set fast_reply=yes		# Quick reply without checking reply-address and subjedt
+###########################################################
+#### Color Configuration.
+#color  obj         front           back  
+#----- ------------ --------------- ---------  
+color hdrdefault   black           cyan     # 邮件头颜色
+color quoted       blue            white    # 引文颜色
+color signature    brightblack     white
+color indicator    brightwhite     magenta
+color attachment   black           green
+color error        red             white
+color message      blue            white
+color search       black           brightyellow
+color status       brightyellow    blue
+color tree         red             white
+color normal       blue            white
+color tilde        green           white
+color bold         brightyellow    white
+color markers      red             white
+color index        red			   default ~O
+mono  bold         bold
+mono  underline    underline
+mono  indicator    reverse
+
+###########################################################
+# Set index
+set index_format="%5C %Z %{%y y %b%d}   -20.20L (%?1?%41&%4c?) %s"
+
+#### Mailing-list
+subscribe subscribe websites@lists.fedoraproject.org|chinese@lists.fedoraproject.org|linux-kernel@vger.kernel.org
+#### End of .muttrc

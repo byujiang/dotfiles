@@ -1,0 +1,784 @@
+"------------------------------ DarkShell's Vimrc -----------------------------"
+"
+" Author:		 DarkShell
+" Email:		 byujiang@gmail.com
+" Modified Time: 2014-08-22 PM 13:27:13
+"
+"------------------------------------------------------------------------------"
+
+set nocompatible								" Set nocompatible // nc "
+let g:mapleader=";"								" Mapping global leader "
+let mapleader=";"								" Mapping local leader "
+" ==========>> Encoding  <<=========== "
+set encoding=utf-8								" Only available when compiled with +multi_byte"
+set fileencoding=utf-8
+set fileencodings=utf-8,gb18030,gbk,gb2312,ucs-bom,shift-jis,cp936,iso-8859-6 " fencs"
+set fileformat=unix								" Default File Format Type"
+set ffs=unix,mac,dos							" File Format Types"
+set ambiwidth=double							" cjk "
+" Set FileFormat as unix
+noremap <Leader>fu :set fileformat=unix<CR>
+" Set FileFormat as dos
+noremap <Leader>fd :set fileformat=dos<CR>
+
+"--------------------------- System and location ------------------------------"
+""" Detect the Operating System
+function! MySys()			 " Operating System "
+	if has("win32")||has("win16")||has("win64")||has("win95")
+		return "win"
+	elseif has("mac")
+		return "mac"
+	else
+		return "unix"
+	endif
+endfunction
+
+if MySys()=="win"
+	let $VIMFILES=$HOME.'\\_vim\'
+	set shell=cmd.exe
+else
+	let $VIMFILES=$HOME.'/.vim/'
+	set shell=bash
+endif
+
+"------------------------------------ Vundle ----------------------------------"
+""" Using vundle for managing vim scripts
+" git clone https://github.com/gmarik/vundle.git ~/.vim/vundle
+let hasVundle=1
+let vundle_readme=expand($VIMFILES.'/vundle/README.md')
+if !filereadable(vundle_readme)
+	echo "Installing vundle now!!!"
+	echo ""
+	silent !mkdir -p $VIMFILES.vundle
+	if !executable('git')
+		echo "You don't seem to have git installed. Please exit vim and install git"
+	else
+		silent !git clone https://github.com/gmarik/vundle $VIMFILES.vundle
+		let hasVundle=0
+	endif
+endif
+filetype plugin indent off
+set rtp+=$VIMFILES/vundle
+call vundle#rc()
+call vundle#begin($VIMFILES)
+
+"""" Scripts on vim.org
+Plugin 'jQuery'
+Plugin 'Vimball'
+Plugin 'vimwiki'
+" Plugin 'yegappan/mru'
+Plugin 'gmarik/vundle'
+Plugin 'yegappan/grep'
+Plugin 'bash-support.vim',{'name':'bash-support'}
+Plugin 'rkulla/pydiction'
+Plugin 'wesleyche/SrcExpl'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-latex/vim-latex'
+" Plugin 'darkshell/Latex-suite'
+"Plugin 'Rip-Rip/clang_complete'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'SnipMate'
+Plugin 'SuperTab'
+Plugin 'winmanager'
+Plugin 'autopreview'
+Plugin 'AutoComplPop'
+Plugin 'neocomplcache'
+Plugin 'OmniCppComplete'
+" Plugin 'vim-scripts/sudo.vim',{'name':'sudo'}
+" Plugin 'vim-scripts/info.vim',{'name':'info'}
+" Plugin 'vim-scripts/calendar.vim',{'name':'calendar'}
+" Plugin 'vim-scripts/SnipMate'
+" Plugin 'vim-scripts/SuperTab'
+" Plugin 'vim-scripts/winmanager'
+" Plugin 'vim-scripts/autopreview'
+" Plugin 'vim-scripts/AutoComplPop'
+" Plugin 'vim-scripts/neocomplcache'
+" Plugin 'vim-scripts/OmniCppComplete'
+"----------------------------------------------"
+Plugin 'a.vim', {'name':'avim'}
+Plugin 'sudo.vim',{'name':'sudo'}
+Plugin 'info.vim',{'name':'info'}
+Plugin 'python.vim', {'name':'python'}
+Plugin 'mivok/vimtodo',{'name':'todo'}
+Plugin 'othree/xml.vim',{'name':'xml'}
+Plugin 'taglist.vim', {'name':'taglist'}
+Plugin 'matchit.zip', {'name':'matchit'}
+Plugin 'calendar.vim',{'name':'calendar'}
+"Plugin 'YankRing.vim',{'name':'YankRing'}
+"Plugin 'closetag.vim', {'name': 'closetag'}
+" Plugin 'darkshell/netrw.vim',{'name':'netrw'}
+Plugin 'vim-scripts/c.vim',{'name':'cvim'}
+"Plugin 'davidhalter/jedi-vim',{'name':'jedi'}
+Plugin 'darkshell/ColorSchemes',{'name':'colors'}
+Plugin 'kevinw/pyflakes-vim',{'name':'pyflakes'}
+" Plugin 'vim-pandoc/vim-pandoc',{'name':'pandoc'}
+"Plugin 'perl-support.vim',{'name':'perl-support'}
+"Plugin 'vim-scripts/blogit.vim',{'name':'blogit'}
+Plugin 'basilgor/vim-autotags',{'name':'autotags'}
+Plugin 'docunext/closetag.vim',{'name':'closetag'}
+Plugin 'hallison/vim-markdown',{'name':'markdown'}
+" Plugin 'plasticboy/vim-markdown',{'name':'markdown'}
+Plugin 'vim-scripts/fortran.vim', {'name':'fortran'}
+"Plugin 'vim-scripts/haskell.vim',{'name':'haskell-syntax'}
+Plugin 'vim-scripts/bufexplorer.zip',{'name':'bufexplorer'}
+"Plugin 'vim-scripts/visualMarks.vim',{'name':'visualmarks'}
+"Plugin 'Twinside/vim-syntax-haskell-cabal',{'name':'cabal'}
+" Plugin 'vim-pandoc/vim-pandoc-syntax',{'name':'pandoc-syntax'}
+"Plugin 'vim-scripts/indenthaskell.vim',{'name':'haskell-indent'}
+Plugin 'vim-scripts/DoxygenToolkit.vim',{'name':'doxygentoolkit'}
+Plugin 'xuhdev/vim-latex-live-preview', {'name':'latex-live-preview'}
+call vundle#end()
+"------------------------------- End of Vundle --------------------------------"
+
+"" ==========================>> General Setting <<=========================== ""
+
+set history=1000								" How many commonds to remember "
+set selection=exclusive							" Use mouse anywhere "
+set mouse=a										" Enable mouse all the time "
+set ttymouse=xterm2
+set mousemodel=popup
+set selectmode=mouse,key						" Selectmode "
+set sessionoptions+=resize						" Keep Windows Size "
+set nobackup									" No Auto-Backup "
+set noswapfile									" No Swapfile"
+set nowritebackup								" Save a backup file before editing // nowb"
+set clipboard+=unnamed
+set autowrite									" Automaticall save before commands"
+set autoread									" Autoread the file when changed outside "
+filetype plugin indent on						" filetype detectinf plugin and indent on "
+set list
+set listchars=tab:\|\ ,trail:^
+
+" =======>> VIM USERINTERFACE <<======= "
+set showmode
+set linebreak									" Set Linebreak "
+set wildmenu									" Turn on Wild Menu "
+set ruler										" Alwasy show current position "
+set scrolloff=5									" Set 7 Lines up or down vertically "
+set number										" Show the line number // nu"
+set hidden										" Hide buffers when abandoned // hid "
+set magic										" Set Magic on for Regular Expression "
+set backspace=indent,eol,start					" Set Backspace "
+set showcmd										" Show Command in Status Line "
+set cursorline									" highlight Current Line "
+set mat=4
+set nolazyredraw								" Do not Redraw When Running macros.. // lz "
+set novisualbell								" No Error Bells In GUI Mode "
+set noerrorbells								" No Error Bells "
+"set paste										" Does not format text when pasting text
+set formatoptions+=tcrmMj
+" set textwidth=100
+set colorcolumn=+0
+
+"""""""" Status Line """""""""
+set cmdheight=1									" The height of commandbar "
+set laststatus=2								" Alwasy Hide the statusline "
+set statusline=									" Initialize Statusline "
+set statusline+=[%F]%m%r%h%w%{'-'}[%{'row='}%l,%{'col='}%v]%{'-'}[%p%%]
+"set statusline+=[%{'file:\ '}%F]%m%r%h%w%{'-'}[%{'row='}%l,%{'col='}%v]%{'-'}[%{'ratio:'}%p%%]
+set statusline+=%{'-'}[%{&fileformat}]%{'-'}[%{&encoding}]
+"set statusline+=%{'-'}[%{'ffs='}%{&fileformat}]%{'-'}[%{'fencs='}%{&encoding}]%{'-'}
+"set statusline+=%{'-'}[%{strftime(\"%m/%d\ %H:%M:%S\")}]
+"let g:Powerline_colorscheme='solarized256'
+
+"""""""""" Folding """"""""""
+set foldenable									" Enable Code Folded // fen"
+set foldmethod=syntax							" Fold Method "
+"set foldclose=all
+
+"""""""""" Search """"""""""""
+set showmatch									" Highlight the Matching Bracket "
+set matchtime=2									" Time of Showing Matching "
+set ignorecase									" Igore case when searching "
+set hlsearch									" Highlight Searching Things // hls "
+" Unhighlight Searching Pattern
+map nh <ESC>:nohl<CR>
+set incsearch									" Search As You Are Typing "
+set smartcase									" Smart Case Matching "
+
+"""""""""" Softtab """""""""""
+set tabstop=4									" Number of Spaces That Tab Use // ts "
+set softtabstop=4								" Number of Spaces That Tab uses When Editing "
+set shiftwidth=4								" ???? // sw "
+set noexpandtab									" Don't Replace Tab with Spaces "
+set smarttab									" Use shiftwidth When Inserting Tab "
+
+""""""""""" Indent """""""""""
+set autoindent									" Auto-Indent // ai "
+set smartindent									" Smart Indent // si "
+set cindent										" C-Style Indent // cin "
+set wrap										" Wrap Line "
+set whichwrap+=<,>,h,l							" Backspace and Cursor Keys Wrap to "
+
+""""""""""" Syntax """""""""""
+syntax enable									" Syntax Highlight "
+syntax on										" Syntax Highlight "
+
+"""""""" ColorScheme """""""""
+set background=dark								" Use a dark background "
+if has("gui_running")
+	colorscheme torte   " good
+else
+	colorscheme aqua
+	"colorscheme darkblue
+	" colorscheme torte
+	"colorscheme metacosm
+endif
+"colorscheme molokai					" Color Scheme "
+"colorscheme blacksea
+"colorscheme adaryn
+"colorscheme adrian
+"colorscheme aiseered
+"colorscheme anotherdark
+"colorscheme astroboy
+"colorscheme asu1dark
+" colorscheme autumn
+"colorscheme baycomb
+"colorscheme blackbeauty
+"colorscheme camo
+"colorscheme motus
+"colorscheme vividchalk
+"colorscheme zenburn
+"colorscheme wuye "good
+"colorscheme golden
+"colorscheme molokai
+
+"""""" Persistent  Undo """"""
+let $dir=expand($VIMFILES.'undodir')
+if !isdirectory($dir)
+	silent !mkdir -p $dir &> /dev/null
+endif
+set undofile
+set undolevels=1000
+set undodir=$dir
+
+"""""""" GUI Settings """"""""
+if has("gui_running")
+	set t_Co=256						" Number of Colors "
+	set cursorline						" Reverse Text"
+	hi cursorline guibg=#333333
+	set guioptions-=m					" No Menu "
+	set guioptions-=T					" "
+	set guioptions-=l
+	set guioptions-=L
+	set guioptions-=r
+	set guioptions-=R
+	set guioptions+=b
+	set spell
+
+	if !MySys()=="win"
+        set guifont=YaHei\ Consolas\ Hybrid\ 22
+	endif
+	if MySys()=="mac"
+		set guifont=Monaco:h12
+	endif
+else
+	highlight ColorColumn ctermbg=8
+	highlight WhitespaceEOF  ctermbg=3
+	highlight TabEOF ctermbg=3
+	match WhitespaceEOF /\s\+$/
+	match TabEOF /\t\+$/
+endif
+""""""" ColorScheme Customize
+" cterm-colors
+"	    NR-16   NR-8    COLOR NAME ~
+"	    0	    0	    Black
+"	    1	    4	    DarkBlue
+"	    2	    2	    DarkGreen
+"	    3	    6	    DarkCyan
+"	    4	    1	    DarkRed
+"	    5	    5	    DarkMagenta
+"	    6	    3	    Brown, DarkYellow
+"	    7	    7	    LightGray, LightGrey, Gray, Grey
+"	    8	    0*	    DarkGray, DarkGrey
+"	    9	    4*	    Blue, LightBlue
+"	    10	    2*	    Green, LightGreen
+"	    11	    6*	    Cyan, LightCyan
+"	    12	    1*	    Red, LightRed
+"	    13	    5*	    Magenta, LightMagenta
+"	    14	    3*	    Yellow, LightYellow
+"	    15	    7*	    White
+
+
+"------------------------------------------------------------------------------"
+" ===========================>> Mapping Setting <<============================ "
+"------------------------------------------------------------------------------"
+" Select the Whole "
+map <C-A> <Esc>ggVG
+" Fast Edit .vimrc "
+nnoremap <Leader>ev <ESC>:tabnew ~/.vimrc<CR>
+nnoremap <Leader>eb <ESC>:tabnew $HOME/.bash_aliases<CR>
+nnoremap <Leader>et <ESC>:tabnew $HOME/.tmux.conf<CR>
+
+nmap 1b 0
+nmap 1e $
+""" Paste Related
+" Copy Selected to the System "
+vnoremap <Leader>y "+y
+" Paste Selected to Vim "
+vnoremap <Leader>p "+p
+""" Save Related
+noremap <Leader>q :q!<cr>
+nnoremap s <ESC>:w!<cr>
+""" Usefule Insert
+nmap <SPACE> :
+nmap <SPACE><SPACE> ::
+nmap :: :!
+imap <silent> <C-D><C-D> <C-R>=strftime("Modified:  %Y-%m-%d %p %H:%M:%S")<cr>
+" Fast Replacement
+noremap <Leader><Leader> :%s//g<Left><Left>
+"" noremap <Leader>' :%s//cg<Left><Left><Left>
+"nnoremap <Leader>
+
+""""""" Moving Windows """""""
+nnoremap <C-j> <C-w><C-j>
+" nnoremap <C-d> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap mw <C-W><C-W>
+
+"""""" Buffers Related """""""
+set bsdir=buffer								" Home directory of FileExplorer"
+set autochdir
+nnoremap <Leader>bn <ESC>:bnext<CR>
+nnoremap <Leader>bp <ESC>:bprevious<CR>
+
+"""""""""""" Tabs """"""""""""
+" Maxium of Opened Tabs "
+set tabpagemax=30
+" Open a New Tab under Current Directory "
+nnoremap <C-T> <ESC>:tabnew .<cr>
+" Close Current Tab "
+nnoremap tc <ESC>:tabclose<cr>
+" Move to the Next Tab "
+nnoremap tn <ESC>:tabnext<cr>
+" Move to the Previous Tab "
+nnoremap tp <ESC>:tabprevious<cr>
+" Open a New Blank Tab "
+nnoremap te <ESC>:tabedit<cr>
+" Switch to the First Tab "
+nnoremap tf <ESC>:tabfirst<cr>
+
+"------------------------------------------------------------------------------"
+"" ======>> Autocmd Command <<====== ""
+"" Jump to Where Exited Before
+if has("autocmd")
+  autocmd! BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+"" Auto Reload .vimrc When Edited.
+autocmd! BufWritePost .vimrc source ~/.vimrc
+
+" ===========>> Some Mode <<========== "
+au FileType txt set linebreak textwidth=88
+
+function! PythonMode()
+	set tabstop=4
+	set shiftwidth=4
+	set noexpandtab
+endfunction
+"command! -nargs=0 MailMode setlocal ft=mail
+
+"------------------------------------------------------------------------------"
+" ====================>> Functions <<===================== "
+"------------------------------------------------------------------------------"
+""" Return Current Directory
+function! GetPWD()
+	return substitute(getcwd(),"", "", "g")
+endfunction
+
+"function! GetDate()
+
+" **************************************************************************** "
+"------------------------------------------------------------------------------"
+""								 Python										  ""
+"------------------------------------------------------------------------------"
+autocmd FileType python set tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType python map <Leader>ll :!python %<CR>
+let g:pydiction_menu_height=3
+let g:pydiction_location='~/.vim/pydiction/complete-dict'
+
+"------------------------------------------------------------------------------"
+""								   	Ruby									  ""
+"------------------------------------------------------------------------------"
+
+"------------------------------------------------------------------------------"
+"" ===================>> HTML & XML <<=================== ""
+"------------------------------------------------------------------------------"
+
+""""""""""""""" xml.vim """"""""""""""""
+""" http://www.vim.org/scripts/script.php?script_id=1397
+
+"------------------------------------------------------------------------------"
+" ==================>> Plugins Setting <<================= "
+"------------------------------------------------------------------------------"
+" ============>> Calendar <<========== "
+" Open Calendar at the left side "
+noremap <F8> :Calendar<cr>
+"""""""""""""""""" Haskell """""""""""""""""""
+""""""""""" neco-ghc
+setlocal omnifunc=necoghc#omnifunc
+""""""""""" cabal
+""""""""""" haskell -- indent
+let g:haskell_indent_if=2
+" ============>> Vimwiki <<=========== "
+let g:vimwiki_use_mouse=1
+let g:vimwiki_menu=''
+let g:vimwiki_folding=1
+let g:vimwiki_camel_case=1
+let g:vimwiki_CJK_length=1
+map <Leader>dd <Plug>VimwikiDeleteLink
+let g:vimwiki_list=[{'path':'~/Sites/wiki/wiki', 'path_html':'~/Sites/wiki/',
+					\'template_path':'~/Sites/wiki/template/', 'auto_export': 1,
+					\'template_default': 'default', 'template_ext': '.html',}]
+let g:vimwiki_diary_months={ 1: 'January', 2: 'February', 3: 'March', 4: 'April',
+							\5: 'May', 6: 'June', 7: 'July', 8: 'August',
+							\9: 'September', 10: 'October', 11: 'November', 12: 'December'}
+let g:vimwiki_valid_html_tags='b,i,s,u,sub,sup,kbd,br,hr,div,del,code,red,center,left,right,h4,h5,h6,pre,script,h1,h2,h3,ul,li,ol,'
+nnoremap <S-F5> <ESC>:VimwikiAll2HTML<cr>
+nnoremap <F5> <ESc>:Vimwiki2HTML<cr>
+let g:vimwiki_hl_cb_checked = 1
+"let g:vimwiki_dir_link = 'index'
+"let g:vimwiki_html_header_numbering = 2
+"let g:vimwiki_conceallevel = 2
+
+" =============>> ctags <<============ "
+" You need to install another ctags for mac os rather than the default ctags in the system.
+" Tags for C++ "
+map <F9> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<cr>
+let g:ctags_path='`which ctags`'				" If ctags is not in your PATH "
+let g:ctags_statusline=1			  			" Display Function Name in the Status Line "
+let g:ctags_title=1					  			" Function Name Displayed in the Title Bar "
+let generate_tags=1					  			" Automatically Generate Tags When Started"
+let g:ctags_regenerate=1			  			" Regenerate Tags Each Time Buffer is Written "
+set tags=
+set tags+=./tags
+set tags+=../tags
+set tags+=./include/tags
+set tags+=../include/tags
+set tags+=/usr/include/tags
+" ==========>> CloseTags  <<========== "
+let g:closetag_html_style=1
+au filetype html,xml,xsl,wiki,css,md,MD  source $VIMFILES/closetag/plugin/closetag.vim
+
+" =======>> cppSyntaxChecher <<======= "
+let g:compile_flag="_D_LINUX_"
+let g:include_path=":../include/:./include/"
+let g:cpp_compiler="/usr/bin/g++"
+let g:enable_warning=1
+let g:cpp_compiler="LANG=C g++ -Wall"
+let g:longest_text=120
+
+" ==========>> ConqueTerm <<========== "
+"let g:ConqueTerm_FastMode=1           " enable fast mode "
+"let g:ConqueTerm_Color=1              " enable terminal colors "
+"let g:ConqueTerm_CloseOnEnd=1         " close buffer when exits "
+
+""""""""""" Command-t """"""""""""""""""
+
+"""""""""""""" Winmanager """""""""""""
+let g:winManagerWindowLayout='FileExplorer|BufExplorer|TagList'
+let g:persistentBehaviour=0           " Exit Vim When Only one left "
+let g:winManagerWidth=20
+let g:defaultExplorer=1
+nmap <silent> <c-w><c-f> <ESC>:FirstExplorerWindow<cr>
+nmap <silent> <c-w><c-b> <ESC>:BottomExplorerWindow<cr>
+noremap <F7> :WMToggle<cr>
+
+""""""""""""""" NerdTree """"""""""""""
+" o: Open/Close File or Directory             t: Open in a new tab
+" T: Open in background tab					  !: execute the file
+" p: Go to Parent Folder					  P: Go to the root Directory
+" K: Go to the first node					  J: Go to the last node
+" u: Open Parent Directory					  m: Show the system menu(add, delete, move)
+" r: Refresh current directory recursively	  R: Refresh root directory recursively
+let g:NERDTree_title='NERDTree'
+let g:NERDTreeMapToggleZoom='a'
+let g:NERDTreeMapToggleHidden='h'
+map <Leader>nt :NERDTreeToggle<CR>
+noremap <F3> <ESC>:NERDTreeToggle<CR>
+
+""""""""""""""" BufExplorer """"""""""""
+"noremap <Leader>o :<ECS>BufExplorer<CR>
+let g:bufExplorerSortBy="name"
+let g:bufExplorerFindActive=1
+
+"""""""""""" NERD_Commenter """"""""""""
+" plugin - NERD_commenter.vim   注释代码用的，
+" [count]<Leader>cc
+"		Comment out the current count lines or text selected in visual mode
+" [count]<Leader>cn
+"		Comment out the current count lines or text selected in visual
+"		mode but forcing nesting
+" [count]<Leader>cm
+"		Comment following count lines using only one set of multipart delimiters
+" [count]<Leader>c<space>
+"		Toogles the comment state of the selected lines. Comment lines if not
+"		not commented, and vice versa.
+" [count] <Leader>cs
+"		Comment out the selected lines in a sexily way
+" [count]<Leader>cu
+"		Uncomment count lines from current line one by one
+" [count]<Leader>cy
+"		Yank select lines and then comment them.
+" <Leader>cA
+"		Adds comment delimeters to the end of line and goes into insert mode
+"		between them.
+" <Leader>ca
+"		Switches to the alternative set of delimeters
+" [count]<Leader>cb
+"		Comment selected lines with the delimeters aligned down both sides, but
+"		when uncommented, there would some trailing space at end of selected lines
+" [count]<Leader>cl
+"		Comment selected lines with the delimeters aligned left side
+
+let NERDSpaceDelims=1       " Leave a space between code and comment
+let NERDCompactSexyComs=1   " More beautiful when commenting many lines
+
+" ============>> Syntax <<============ "
+" ====>> Conkyrc <<==== "
+" Nothing "
+" ======>> PHP <<====== "
+" Nothing "
+" ====>> jquery <<===== "
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
+" ==>> JavaScripts <<== "
+" Nothing "
+
+"-----------------------------------------------------------------
+" plugin -- checksyntax.vim
+"-----------------------------------------------------------------
+let g:checksyntax_auto = 0 "
+" ============>> AutoTags <<========== "
+
+" ===========>> Auto-Pairs <<========== "
+let g:AutoPairsMapSpace=0
+let g:AutoPairsFlyMode=1
+let g:AutoPairsMapCR=0
+let g:AutoPairsCenterLine=1
+autocmd FileType tex let g:AutoPairs={'(':')','[':']','{':'}','"':'"',"'":"'"}
+" Control+o x to delete the paren.
+
+" =========>> AutoPreview <<========== "
+let g:AutoPreview_enabled=0
+let g:AutoPreview_allowed_filetypes=["c","cpp","h","java","hpp","C","cxx","sh","py","cc","m","gp"]
+nnoremap <Leader>ap :AutoPreviewToggle<cr>
+inoremap <F6> <ESC>:AutoPreviewToggle<cr>
+set updatetime=500
+
+" =============>> a.vim <<============ "
+" Splits and Switches "
+noremap <Leader>as <ESC>:AS<CR>
+" Vertical Splits and Switches "
+noremap <Leader>av <ESC>:AV<CR>
+" New Tab and Switches "
+noremap <Leader>at <ESC>:AT<CR>
+" noremap <Leader>ih <ESC>:IH<CR>	   " Switches to File under Cursor "
+" noremap <Leader>is <ESC>:IHS<CR>	   " Splits and Switches to File under Cursor "
+" Vertical Splits and Switches "
+noremap <Leader>iv <ESC>:IHV<CR>
+" New Tab and Switches to File under Curror "
+noremap <Leader>it <ESC>:IHT<CR>
+" noremap <Leader>ihn <ESC>:IHN<CR>	   " Cycles through Matches "
+
+" =============>> ls.vim <<====
+" List Files under CUrrent Directory in another window
+" noremap <Leader>ls <ESC>:LS<CR>
+
+" ===========>> MRU <<========= "
+" let MRU_Max_Entries=400
+" let MRU_Exclude_Files = '\v^.*\~$|/COMMIT_EDITMSG$|/itsalltext/|^/tmp/'
+" let MRU_Add_Menu=0					   " Not Adding to Menu Bar "
+" nmap <Leader>m :MRU<CR>
+
+" ============>> Sudo.vim <<========== "
+" :e sudo:file
+" :vs sudo:file
+" :split sudo:file
+" and so on
+" vim sudo:file
+
+" --------------------- Done Above ----------------------- "
+
+" ============>> Syntax <<============ "
+" ====>> todo.vim <<=== "
+if join(getline(1,100),' ') =~? '\<#\?TODO\>'
+    setfiletype todo
+endif
+""""""""""""""" autofmt """"""""""""""""
+""""""""""" auto wrap for chinese
+
+" ============>> AutoClose <<========= "
+" ===========>> Latex-Suite <<========= "
+if MySys()=="win"
+	set shellslash		"for windows
+endif
+"" Set Viewer to Open The Target ""
+if MySys()=="unix"
+	if executable("evince")
+		let g:Viewer="evince"
+		let g:Tex_ViewRule_pdf='evince'
+	elseif executable("okular")
+		let g:Viewer="okular"
+	    let g:Tex_ViewRule_pdf='okular'
+	endif
+elseif MySys()=="mac"
+    let g:Tex_ViewRule_pdf = 'open -a Preview'
+    let g:Viewer="open -a Preview"
+endif
+
+let g:Tex_DefaultTargetFormat="pdf"
+" set grepprg=grep\ -nH\ $*
+let g:tex_flavor='xelatex'							" Flavered Tex Engine "
+autocmd FileType tex set sw=2
+let g:Tex_CompileRule_dvi='xelatex -src-specials -interaction=nonstopmode $*'
+let g:Tex_CompileRule_pdf='latexmk -xelatex -synctex=1 -src-specials -interaction=nonstopmode $*'
+let g:Tex_UseMakefile=1
+let g:makeprg='xelatex -src-specials -interaction=nonstopmode $*'
+
+" let g:Tex_CompileRule_pdf='xelatex -src-specials -interaction=nonstopmode $*'
+noremap <Leader>ll <ESC>:w<CR> :<Leader>ll<ESC><CR>
+"autocmd FileType tex map <Leader>t <ESC>:w<CR> :<Leader>ll<ESC><CR>
+"autocmd FileType tex nmap <F3> <ESC>:w<CR> <Leader>lv<CR>
+"autocmd FileType tex nmap <Tab> <C-j>
+"autocmd FileType tex imap <Tab> <C-j>
+"autocmd FileType tex vmap <Tab> <C-j>
+
+" ======>> C/C++ IDE Compilor <<====== "
+"""" Tags
+"""" Compilor
+"""" Cscope
+"""""""""""" Bash-support """""""""""""""
+" autocmd! FileType sh !chmod +x %
+
+" =========>> Taglist <<======== "
+""" which ctags to use
+if MySys()=="win"
+	let Tlist_Ctags_Cmd='ctags.exe'
+else 
+	let Tlist_Ctags_Cmd='`which ctags` '
+endif
+let TagList_title="TagList"					" TagList Window Name"
+let Tlist_File_Fold_Auto_Close=1				" Hide function tags in unactive files
+let Tlist_Show_One_File=1						" Show tags of one files
+let Tlist_OnlyWindow=1
+let Tlist_Use_Right_Window=1					" Tags on the Right"
+let Tlist_Sort_Type='name'
+let Tlist_Exit_OnlyWindow=1						" Exit vim if only one window exist
+let Tlist_Show_Menu=1
+let Tlist_Max_Submenu_Items=10
+let Tlist_Max_Tag_length=20
+let Tlist_Use_SingleClick=1						" Turn around on singleclick
+let Tlist_Auto_Open=0
+let Tlist_Auto_Update=1
+let Tlist_Close_On_Select=0
+let Tlist_GainFocus_On_ToggleOpen=1				" Gain the Focus on toggle openning
+let Tlist_Process_File_Always=1					" Process File Always
+let Tlist_WinWidth=18
+let Tlist_Use_Horiz_Window=0
+let Tlist_Enable_Fold_Column=0
+let Tlist_Display_Prototype=0
+let Tlist_Hightlight_Tag_On_BufEnter=1
+let Tlist_Compact_Format=1
+let tlist_diff_settings = 'diff;f:file'
+let tlist_git_settings = 'diff;f:file'
+let tlist_gitcommit_settings = 'gitcommit;f:file'
+let tlist_privoxy_settings = 'privoxy;s:sections'
+set iskeyword+=:,-,_
+"" Open/Close TagList "
+nmap <silent> tl <ESC>:TlistToggle<CR>
+
+""""""""""" NeoComplCache """""""""""""
+let g:acp_enableAtStartup=0						" Disable AutoComplPop "
+let g:neocomplcache_enable_at_startup=1			" Use NeoComplCache at Startup "
+let g:neocomplcache_enable_auto_select=1		" AutoComplPop like Behavior "
+let g:NeoComplCache_Enable_Smart_Case=1			" Use SmartCase "
+let g:neocomplcache_enable_camel_case_completion=1			" Use Camel Case Completion "
+let g:NeoComplCache_EnableInfo=1
+let g:neocomplcache_enable_underbar_completion=1" Use underbar Completion "
+let g:neocomplcache_min_syntax_length=2			" Set Minimum syntax keyword length "
+let g:neocomplcache_enable_quick_match=1
+let g:neocomplcache_max_list=20					" Set the Maxium list in the popup menu "
+if !exists('g:neocomplcache_keyword_patterns')
+	let g:neocomplcache_keyword_patterns={}
+else 
+	let g:neocomplcache_keyword_patterns['default']='\h\w*'
+endif
+let g:neocomplcache_auto_completion_length=1
+let g:neocomplcache_enable_ignore_case=1
+let g:NeoComplCache_EnableSkipCompletion=1
+let g:NeoComplCache_SkipInputTime='0.5'
+let g:NeoComplCache_SnippetsDir=$VIMFILES.'bundle/snipMate/snippets'
+
+"""""""" OmniCppComplete """""""""
+let OmniCpp_NamespaceSearch=1
+let OmniCpp_GlobalScopeSearch=1
+let OmniCpp_ShowAccess=1
+let OmniCpp_ShowPrototypeInAbbr=1
+let OmniCpp_MayCompleteDot=1
+let OmniCpp_MayCompleteArrow=1
+let OmniCpp_MayCompleteScope=1
+let OmniCpp_Defaultnamespaces=["std","_GLIBCXX_STD"]
+
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+"""""""""""""" grep """"""""""""""""""""
+set grepprg=grep\ -nH\ $*
+let Grep_Skip_Dirs = 'RCS CVS SCCS .svn generated' " Grep_Skip_Dirs "
+
+""""""""""""""""""""""""""""""""""""""""
+" ============>> SnipMate <<========= "
+
+""""""""""""""""""""""""""""""""""""""""
+" ============>> Supertab <<========= "
+
+
+""""""""""""""""""""""""""""""""""""""""
+" ============>> cvim <<============= "
+
+""""""""""""""" matchit.vim """""""""""""""""""""""
+" % 正向匹配      g% 反向匹配
+" [% 定位块首     ]% 定位块尾
+
+""""""""""""""""""""""""""""""""""""""""
+""""""""""""""" ZenCoding.vim """""""""""""""""""""
+" http://github.com/mattn/zencoding-vim
+autocmd Filetype python map <Leader>ll :!python %<CR>
+let g:pydiction_menu_height=3
+let g:pydiction_location='~/.vim/pydiction/complete-dict'
+""""""""""""""""""""""""""""""""""""""""
+""""""""""""""" surround.vim """"""""""""""""""""""
+" http://www.vim.org/scripts/script.php?script_id=1697
+
+""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""" yankring.vim """"""""""""""""""
+" http://www.vim.org/scripts/script.php?script_id=1234
+
+""""""""""""""""""""""""""""""""""""""""
+" ==========>> pyflakes-vim <<======= "
+""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""
+""""""""""""""" Doxygen """"""""""""""
+let g:DoxygenToolkit_authorName="Asins - asinsimple AT gmail DOT com"
+let g:DoxygenToolkit_briefTag_funcName="yes"
+map <leader>da :DoxAuthor<CR>
+map <leader>df :Dox<CR>
+map <leader>db :DoxBlock<CR>
+map <leader>dc a /*  */<LEFT><LEFT><LEFT>
+
+""""""""""""""" Vjde """""""""""""""""
+"let g:vjde_install_path=$VIMFILES.'bundle/vjde/plugin'
+
+""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------"
+""								Copyright									  ""
+"------------------------------------------------------------------------------"
+let g:AuthorName='byujiang'
+let g:AuthorEmail='byujiang@gmail.com'
+let g:AuthorCompany='Whu University'
+"------------------------------------------------------------------------------"

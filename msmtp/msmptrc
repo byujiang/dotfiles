@@ -1,0 +1,37 @@
+#Configuration of Mutt
+#By byujiang@gmail.com
+#Modified Time: 2013-07-21 PM 18:27:51
+defaults
+tls on
+tls_certcheck off
+auth on
+logfile ~/.msmtp.log
+
+#Gmail Service
+account gmail
+host smtp.gmail.com
+port 587
+user
+from
+password
+
+#Hotmail Service
+account hotmail
+host smtp.live.com
+port 587
+user
+from
+password
+
+#163 Service
+account 163
+tls off
+auth plain
+host
+from
+user
+password
+
+#Set a default account
+account default:hotmail
+#End of File

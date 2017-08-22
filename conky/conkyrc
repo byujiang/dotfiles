@@ -1,0 +1,143 @@
+#!/usr/bin/conky -d -c
+######################
+# - Conky settings - #
+######################
+update_interval 1
+total_run_times 0
+net_avg_samples 2
+cpu_avg_samples 2
+if_up_strictness link
+
+imlib_cache_size 0
+double_buffer yes
+background yes 
+no buffers yes
+format_human_readable
+
+#####################
+# - Text settings - #
+#####################
+use_xft yes
+xftfont Ubuntu:size=8
+override_utf8_locale yes
+text_buffer_size 8000
+stippled_borders 3
+#############################
+# - Window specifications - #
+#############################
+own_window_class Conky
+own_window yes 
+own_window_colour 000000	# Black
+own_window_type override 
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+pad_percents 2			# to co nizej, miejsc po przecinku
+alignment top_right
+gap_x 5
+gap_y 40
+minimum_size 1000 
+maximum_width 180
+max_user_text 10000
+max_specials 1024
+
+default_bar_size 60 8
+uppercase no
+use_spacer right
+#########################
+# - Graphics settings - #
+#########################
+draw_shades no
+border_margin 5
+border_width 5
+draw_borders no
+draw_outline no
+
+default_color e1e1e1
+
+color0 1E1C1A
+color1 green
+color2 1E1C1A
+color3 green
+color4 5e1014
+color5 a82553
+color6 FCAF3E
+
+default_outline_color 000000 	# Black
+default_shade_color 000000	# Black
+##############
+TEXT
+${color2}${goto 5}${font DejaVu Sans Mono:size=44}${time %H}${font DejaVu Sans Mono:size=20}${voffset -25}'${time %M}${font DejaVu Sans Mono:size=10}${voffset -12}''${time %S}
+${color2}${goto 90}${voffset 16}${font :size=12}${time %A}
+${voffset 4}${color2}${goto 15}${font :size=14}${color4}${time %d %B %Y} ${color2}${font DejaVu Sans Mono:size=8}${execpi 3600 DJS=`date +%_d`; cal -m | sed '1d' | sed '/./!d' | sed 's/$/ /' | fold -w 21 | sed -n '/^.\{21\}/p' | sed 's/^/${alignc} /' | sed /" $DJS "/s/" $DJS "/" "'${color2}'"$DJS"'${color}'" "/}
+${voffset 4}${color4}${font Ubuntu:style=Bold:size=10}User: ${alignr}${execi 10800 echo `whoami`@`hostname`}
+##############
+# - SYSTEM - #
+##############
+${color5}${font Ubuntu:style=Bold:size=8}SYSTEM ${stippled_hr}
+# ${color2}${voffset 6}${font OpenLogos:size=19}U${font}
+${voffset 1}${color2}System: ${alignr}${color2}${sysname}
+${color2}Dist: ${alignr}${color2}${execi 10800 uname -a|awk '{print $4}'}
+${color2}Arch: ${alignr}${color2}${machine}
+${color2}Kernel: ${alignr}${color2}${kernel}
+${color2}Uptime: ${alignr}${color2}${uptime}
+# |--HDT
+${color5}${font Ubuntu:style=Bold:size=8}HDD${stippled_hr}
+# ${voffset 2}${color2}${font OpenLogos:size=19}T${color2}${font}
+${voffset 1}${color2}Temp: ${alignr}${font Ubuntu:style=Bold:size=8}${color5}${execi 120 sudo hddtemp /dev/sda -n --unit=C}°C${font}${color2}
+${color2}Root: ${fs_used /} / ${fs_size /} ${alignr} ${fs_used_perc /}%
+${color2}home: ${fs_used /home} / ${fs_size /home} ${alignr} ${fs_used_perc /home}%${color2}
+# |--CPU
+${voffset 1}${color5}${font Ubuntu:style=Bold:size=8}CPU${stippled_hr}${font}
+# ${voffset 2}${offset 2}${color0}${font OpenLogos:size=19}C${font}
+${voffset 1}${color2}Core1: ${font Ubuntu:style=Bold:size=8}${color2}${cpu cpu1}%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color4}${execi 30 sensors | grep 'Core 0' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'}${font}${color5}${cpugraph cpu1 8,50 }
+${color2}Core2: ${font Ubuntu:style=Bold:size=8}${color2}${cpu cpu2}%${font} ${alignr}${font Ubuntu:style=Bold:size=8}${color4}${execi 30 sensors | grep 'Core 1' | awk '{print $3}' | sed 's/+//' | sed 's/\.0//g'}${color}${font}${color5}${cpugraph cpu2 8,50 }
+# |--MEM
+${voffset 1}${font Ubuntu:style=Bold:size=8}${color4}MEM${stippled_hr}${font}
+# ${voffset }${offset 1}${color0}${font Poky:size=16}M${font}
+${color2}RAM: ${alignr}${font Ubuntu:style=Bold:size=8}${color5}${memperc}%${font}${voffset 3}${offset 1}${color2}${membar 4,18}
+${color2}Free: ${alignr}${font Ubuntu:style=Bold:size=8}${color2}${memeasyfree}${font}
+${color2}Used: ${alignr}${font Ubuntu:style=Bold:size=8}${mem}${font}
+# |--PROC
+${voffset 1}${color4}${font Ubuntu:style=Bold:size=8}Process${stippled_hr}${font}
+${voffset -1}${color2}Processes: ${alignr 13}CPU${alignr}RAM
+${voffset -1}${color2}${top name 1}${color}${font Ubuntu:style=Bold:size=8}${color2} ${goto 126}${top cpu 1}${alignr }${top mem 1}${color}${font}
+${voffset -1}${color2}${top name 2}${color}${font Ubuntu:style=Bold:size=8}${color2} ${goto 126}${top cpu 2}${alignr }${top mem 2}${color}${font}
+${voffset -1}${color2}${top name 3}${color}${font Ubuntu:style=Bold:size=8}${color2} ${goto 126}${top cpu 3}${alignr }${top mem 3}${color}${font}
+${voffset -1}${color2}${top name 4}${color}${font Ubuntu:style=Bold:size=8}${color2} ${goto 126}${top cpu 4}${alignr }${top mem 4}${color}${font}
+################
+# - CALENDAR - #
+################
+${voffset 1}${font Ubuntu:style=Bold:size=8}${color5}Calendar${stippled_hr}
+${voffset -2}${color4}${font Poky:size=24}D${font}${voffset -6}${font Ubuntu:style=Bold:size=8}${offset -19}${color2}${time %d}${font}${color2}${voffset -2}${font Monospace:size=9}${execpi 300 DJS=`date +%_d`; cal -h |sed '2,8!d'| sed '/./!d' | sed 's/^/${goto 32} /'| sed 's/$/ /' | sed 's/^/ /' | sed /" $DJS "/s/" $DJS "/" "'${font Arial:style=Bold:size=9}${voffset -2}${offset -4}${color5} '"$DJS"'${color2}${font Monospace:size=9}'" "/}${voffset -1}
+${voffset -22}
+###############
+# - NETWORK - #
+###############
+${voffset 1}${font Ubuntu:style=Bold:size=8}${color5}NETWORK $stippled_hr${font}
+# |--wlan0
+${if_up wlan0}
+${voffset -8}${font Ubuntu:style=Bold:size=8}${color2}Wlan0${font}${voffset 4}
+${color2}Up: ${font Ubuntu:style=Bold:size=8}${color4}${alignr}${upspeed wlan0}/s${font}${color2}${upspeedgraph wlan0 8,60 #421222 #521333}
+${color2}Total: ${alignr}${font Ubuntu:style=Bold:size=8}${color2}${totalup wlan0}${font}
+${color2}Down: ${font Ubuntu:style=Bold:size=8}${color4}${alignr}${downspeed wlan0}/s${color}${font} ${color2}${downspeedgraph wlan0 8,60 #421233 #521311}
+${color2}Total:${alignr}${font Ubuntu:style=Bold:size=8}${color2}${totaldown wlan0}${color}${font}
+${color2}Signal: ${font Ubuntu:style=Bold:size=8}${color4}${wireless_link_qual_perc wlan0}%${font}${alignr}${color5}${wireless_link_bar 8,60 wlan0}
+${color2}Local IP: ${alignr}${color2}${addr wlan0}
+${color2}Public IP: ${alignr}${color2}${execi 10800 curl ifconfig.me}${color}
+# |--ETH0
+${else}${if_up eth0}
+${voffset -5}Up: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed eth0}${color}${font} ${alignr}${color2}${upspeedgraph eth0 8,60 }${color}
+${voffset 2}${color2}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totalup eth0}${color}${font}
+${color2}${voffset 5}Down: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed eth0}${color}${font} ${alignr}${color2}${downspeedgraph eth0 8,60 }${color}
+${voffset 2}${color2}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown eth0}${font}
+${color1}${voffset 4}Local IP: ${alignr}${color2}${addr eth0}${color}
+${voffset 2}${color1}Public IP: ${alignr}${color3}${execi curl ifconfig.me}${color}
+# |--PPP0
+${else}${if_up ppp0}
+${voffset -5}${color0}${font Webdings:size=17}”${font}${color}${goto 32}${voffset -5}Up: ${font Ubuntu:style=Bold:size=8}${color1}${upspeed ppp0}${color}${font} ${alignr}${color2}${upspeedgraph ppp0 8,60 }${color}
+${goto 32}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totalup ppp0}${color}${font}
+${voffset 2}${color0}${font Webdings:size=17}“${font}${color}${goto 32}${voffset -5}Down: ${font Ubuntu:style=Bold:size=8}${color1}${downspeed ppp0}${color}${font} ${alignr}${color2}${downspeedgraph ppp0 8,60 }${color}
+${goto 32}Total: ${font Ubuntu:style=Bold:size=8}${color2}${totaldown ppp0}${color}${font}
+${voffset 10}${color0}${font Webdings:size=16}¬${font}${color}${goto 32}${voffset -4}Local IP: ${alignr}${color2}${addr ppp0}${color}
+${else}${voffset 4}${offset 4}${color0}${font Wingdings:size=20}N${font}${color}${voffset -6}${goto 32}Network Unavailable${voffset 14}
+${endif}${endif}${endif}
