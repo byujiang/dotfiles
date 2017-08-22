@@ -1,15 +1,12 @@
-### Personal bash command Directory
-##########################################
-#export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/qt/5.5/clang_64/include
-#export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/qt/5.5/clang_64/include
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/qt/5.5/clang_64/lib
+## Personal bash command Directory
+#########################################
 export DYLD_LIBRARY_PATH=/usr/local/qt/5.5/clang_64/lib
-## export EDITOR=vim
-## Command Aliases
+# Command Aliases
+export EDITOR=vim
 alias sb='sudo reboot'
 alias c='clear'
 alias e='exit'
-#
+
 if [[ `uname` == "Darwin" ]]; then
 	alias ls='ls -G'
 else
@@ -45,7 +42,7 @@ alias qs='ps -ef|grep -v grep|grep'
 ######## git aliases ########
 alias gita='git add -f --all * && git commit -a -m'
 alias gitp='git push origin master'
-################# Mac ########################
+################# Mac #################
 if [[ `uname` == "Darwin" ]]; then
 	alias show='defaults write com.apple.finder AppleShowAllFiles -bool true'
 	alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false'
@@ -63,38 +60,38 @@ if [[ `uname` == "Darwin" ]]; then
 		sudo networksetup -setdnsservers Wi-Fi Empty
 		sudo networksetup -setsocksfirewallproxystate Wi-Fi off
 	}
-############ ftp ############
+########### ftp ############
 	alias ftpon='sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist'
 	alias ftpoff='sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist'
-########### MySQL ###########
+########## MySQL ###########
 	alias mysql='/usr/local/mysql/bin/mysql'
 	alias mysqladmin='/usr/local/mysql/bin/mysqladmin'
-############ PATH ###########
-#	### QT 5.5
+########### PATH ###########
+	### QT 5.5
 	export PATH=$PATH:/usr/local/qt/5.5/clang_64/bin
 	export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/qt/5.5/clang_64/lib/pkgconfig:/usr/local/lib/pkgconfig/
-#	### qtgrace
+	### qtgrace
 	if [[ -d /Applications/QMBF.app/ ]]; then
 		export PATH=$PATH:/Applications/QMBF.app/Contents/MacOS
 	fi
-#	### CMake.app
+	### CMake.app
 	if [[ -d /Applications/CMake.app/Contents/bin ]];then
 		export PATH=$PATH:/Applications/CMake.app/Contents/bin
 	fi
-#	### ROOT
+	### ROOT
 	if [[ -d /Applications/root/bin/ ]]; then
 		export PATH=$PATH:/Applications/root/bin
 	fi
-#!  ### TexLive
+!  ### TexLive
 	if [[ -d /usr/local/texlive/2016/bin/x86_64-darwin/ ]]; then
 		export PATH=$PATH:/usr/local/texlive/2016/bin/x86_64-darwin
 	fi
-#	### Python 3.5
+	### Python 3.5
 	if [[ -d /Library/Frameworks/Python.framework/Versions/3.5/bin ]]; then
 		export PATH=$PATH:/Library/Frameworks/Python.framework/Versions/3.5/bin
 	fi
-#############################
-#
+############################
+
 	function watch(){
 		while :;do
 			clear
@@ -103,8 +100,8 @@ if [[ `uname` == "Darwin" ]]; then
 		done
 	}
 fi
-############# Personal Functions ############
-## This script file is for converting gb18030 files to utf-8 files in batches
+############ Personal Functions ############
+# This script file is for converting gb18030 files to utf-8 files in batches
 function gb2utf(){
 	set -o nounset
 	dir=$1
@@ -138,18 +135,18 @@ function g2u(){
 	output=$2
 	iconv -f gb18030 -t utf-8 "$input" > "$output"
 }
-#
-####---------------------------------------------------###
+
+###---------------------------------------------------###
 # xqcd and x settings
-if [[ -d $HOME/workshop/xqcd/x/bin ]]; then
-	export xpath="$HOME/workshop/xqcd/x/"
-	export PATH=$PATH:$HOME/workshop/xqcd/x/bin
+if [[ -d $HOME/Workspace/xqcd/x/bin ]]; then
+	export xpath="$HOME/Workspace/xqcd/x/"
+	export PATH=$PATH:$HOME/Workspace/xqcd/x/bin
 fi
-#
-#
+
+
 export PATH=/usr/local/sbin:$PATH
 export PATH=$PATH:/usr/local/lib/node_modules/:$HOME/bin:$HOME/usr/bin
-#
+
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -169,7 +166,7 @@ function revtex(){
 	\rm -f ${file}.aux ${file}.log ${file}.bbl ${file}.blg
 }
 
-##### ssserver or sslocal
+#### ssserver or sslocal
 function rmtex(){
 	test -f *.aux && rm -f *.aux
 	test -f *.lot && rm -f *.lot
@@ -179,16 +176,37 @@ function rmtex(){
 	test -f *.lof && rm -f *.lof
 	test -f *-inc.eps && rm -f *-inc.eps
 }
-#
-#
+
+
 alias pc='proxychains4 -q'
-alias yt='proxychains4 youtube-dl'
-# alias wget='wget --no-check-certificate'
+alias yt='proxychains4 -q youtube-dl --recode-video mp4'
+alias wget='wget --no-check-certificate'
 
 #export http_proxy=127.0.0.1:1080
 #export https_proxy=127.0.0.1:1080
 #export socks_proxy=127.0.0.1:1080
 
+export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
+alias open='evince'
+alias ppv='proxychains4 -q mpv'
+alias gcc='gcc -fdiagnostics-color=always -std=c11'
+alias g++='g++ -fdiagnostics-color=always -std=c++11'
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
 function open(){
 	gnome-open "$1" >/dev/null 2>&1
+}
+
+#### sss ###
+function sss(){
+	opt=$1
+	json_path=~/tmp/ss/
+	if [[ $opt == "" ]]; then
+		echo "Usage:\n sss 4/6"
+		return 130
+	fi
+	set -x
+	cd ${json_path}
+	ln -s ss${opt}.json ss.json
+	sudo systemctl restart gcm
 }
