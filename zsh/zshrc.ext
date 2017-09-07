@@ -205,8 +205,17 @@ function sss(){
 		echo "Usage:\n sss 4/6"
 		return 130
 	fi
-	set -x
+	if [[ $1 == "0" ]]; then
+		sudo systemctl stop gcm
+		return
+	fi
+	if [[ $1 == "1" ]]; then
+		sudo systemctl restart gcm
+		return
+	fi
+
 	cd ${json_path}
-	ln -s ss${opt}.json ss.json
+	ln -sf ss${opt}.json ss.json
 	sudo systemctl restart gcm
+	cd -
 }

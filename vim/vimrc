@@ -53,7 +53,7 @@ if !filereadable(vundle_readme)
 	if !executable('git')
 		echo "You don't seem to have git installed. Please exit vim and install git"
 	else
-		silent !git clone https://github.com/gmarik/vundle $VIMFILES.vundle
+		silent !git clone https://github.com/gmarik/vundle $VIMFILES/vundle
 		let hasVundle=0
 	endif
 endif
