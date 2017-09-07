@@ -215,7 +215,37 @@ function sss(){
 	fi
 
 	cd ${json_path}
+<<<<<<< HEAD
 	ln -sf ss${opt}.json ss.json
+=======
+	ln -fs ss${opt}.json ss.json
+>>>>>>> 2cc5c0f02def2a7acfe575e3eb715d8d6763af30
 	sudo systemctl restart gcm
 	cd -
 }
+
+function luac(){
+	echo "$*"
+	lua <<- EOF
+		log=math.log;  sqrt=math.sqrt;
+		 sin=math.sin;  sinh=math.sinh;
+		 cos=math.cos;  cosh=math.cosh;
+		 tan=math.tan;  tanh=math.tanh;
+		 abs=math.abs;  flr=math.floor
+		 exp=math.exp;  rand=math.random;
+		 pow=math.pow;  ceil=math.ceil;
+		 max=math.max;  min=math.min;
+		 mod=math.fmod; log10=math.log10;
+		 pi=math.pi;    print($*)
+	EOF
+}
+
+function py(){
+	echo "$*"
+	python3 <<- EOF
+		from math import pi, sin, pow, cos, tan, sinh, cosh, tanh,\
+						  exp, fabs, log, log10, modf, fmod, pow, floor
+		print($*)
+	EOF
+}
+
