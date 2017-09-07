@@ -215,11 +215,7 @@ function sss(){
 	fi
 
 	cd ${json_path}
-<<<<<<< HEAD
-	ln -sf ss${opt}.json ss.json
-=======
 	ln -fs ss${opt}.json ss.json
->>>>>>> 2cc5c0f02def2a7acfe575e3eb715d8d6763af30
 	sudo systemctl restart gcm
 	cd -
 }
