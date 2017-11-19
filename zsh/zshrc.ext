@@ -42,6 +42,8 @@ alias qs='ps -ef|grep -v grep|grep'
 ######## git aliases ########
 alias gita='git add -f --all * && git commit -a -m'
 alias gitp='git push origin master'
+alias grep='grep -v grep|grep'
+
 ################# Mac #################
 if [[ `uname` == "Darwin" ]]; then
 	alias show='defaults write com.apple.finder AppleShowAllFiles -bool true'
@@ -221,7 +223,7 @@ function sss(){
 }
 
 function luac(){
-	echo "$*"
+	# echo "$*"
 	lua <<- EOF
 		log=math.log;  sqrt=math.sqrt;
 		 sin=math.sin;  sinh=math.sinh;
@@ -236,8 +238,8 @@ function luac(){
 	EOF
 }
 
-function py(){
-	echo "$*"
+function pyc(){
+	# echo "$*"
 	python3 <<- EOF
 		from math import pi, sin, pow, cos, tan, sinh, cosh, tanh,\
 						  exp, fabs, log, log10, modf, fmod, pow, floor
@@ -245,3 +247,6 @@ function py(){
 	EOF
 }
 
+function calc(){
+	luac "$*"
+}
