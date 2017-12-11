@@ -43,6 +43,7 @@ alias qs='ps -ef|grep -v grep|grep'
 alias gita='git add -f --all * && git commit -a -m'
 alias gitp='git push origin master'
 alias grep='grep -v grep|grep'
+alias tranz='trans :zh'
 
 ################# Mac #################
 if [[ `uname` == "Darwin" ]]; then
@@ -248,5 +249,5 @@ function pyc(){
 }
 
 function calc(){
-	luac "$*"
+	pyc "$*"
 }

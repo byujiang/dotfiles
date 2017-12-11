@@ -1,7 +1,5 @@
 #!/bin/bash -
 
-set -x
-
 current_path=`pwd -P`
 
 ln -sf ${current_path}/bash/bashrc.ext ~/.bashrc.ext
@@ -18,10 +16,8 @@ if [[ -d ~/.ipython/profile_default/startup ]]; then
 fi
 ln -sf ${current_path}/ipython/profile/startup ~/.ipython/profile_default/
 
-
 ####
 mkdir -p ~/.config
 ln -sf ${current_path}/mpv ~/.config/mpv
-
 ln -sf ${current_path}/tmux/tmux.conf ~/.tmux.conf
 ln -sf ${current_path}/vim/vimrc ~/.vimrc

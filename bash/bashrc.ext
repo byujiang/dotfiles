@@ -46,11 +46,14 @@ alias vibash='vi ~/.bash_aliases'
 # alias make='make -j4'
 alias octave='octave --silent'
 alias qs='ps -ef|grep -v grep|grep'
+alias tranz='trans :zh'
+
 ####### xelatex ############
 alias rmtex='rm -rf *.aux *.lof *.lot *.out *.toc *.synctex.gz* *.log *-inc.eps'
 ####### git aliases ########
 alias gita='git add -f --all * && git commit -a -m'
 alias gitp='git push origin master'
+
 ################ Mac ########################
 if [[ `uname` == "Darwin" ]]; then
 	alias show='defaults write com.apple.finder AppleShowAllFiles -bool true'
@@ -153,3 +156,56 @@ is_login_shell
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export PATH=$PATH:$HOME/usr/bin:/usr/local/sbin
+
+
+#### sss ###
+function sss(){
+	opt=$1
+	json_path=~/tmp/ss/
+	if [[ $opt == "" ]]; then
+		echo "Usage:\n sss 4/6"
+		return 130
+	fi
+	if [[ $1 == "0" ]]; then
+		sudo systemctl stop gcm
+		return
+	fi
+	if [[ $1 == "1" ]]; then
+		sudo systemctl restart gcm
+		return
+	fi
+
+	cd ${json_path}
+	ln -fs ss${opt}.json ss.json
+	sudo systemctl restart gcm
+	cd -
+}
+
+function luac(){
+	# echo "$*"
+	lua <<- EOF
+		log=math.log;  sqrt=math.sqrt;
+		 sin=math.sin;  sinh=math.sinh;
+		 cos=math.cos;  cosh=math.cosh;
+		 tan=math.tan;  tanh=math.tanh;
+		 abs=math.abs;  flr=math.floor
+		 exp=math.exp;  rand=math.random;
+		 pow=math.pow;  ceil=math.ceil;
+		 max=math.max;  min=math.min;
+		 mod=math.fmod; log10=math.log10;
+		 pi=math.pi;    print($*)
+	EOF
+}
+
+function pyc(){
+	# echo "$*"
+	python3 <<- EOF
+		from math import pi, sin, pow, cos, tan, sinh, cosh, tanh,\
+						  exp, fabs, log, log10, modf, fmod, pow, floor
+		print($*)
+	EOF
+}
+
+function calc(){
+	pyc "$*"
+}
