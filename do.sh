@@ -3,9 +3,9 @@
 current_path=`pwd -P`
 
 ln -sf ${current_path}/bash/bashrc.ext ~/.bashrc.ext
-echo "test -f ~/.bashrc.ext && source ~/.bashrc.ext" >> ~/.bashrc
+echo "test -f ~/.bashrc.ext && [[ \${AMITO_BASH_EXT_LOADED} != "1" ]] && source ~/.bashrc.ext" >> ~/.bashrc
 ln -sf ${current_path}/zsh/zshrc.ext ~/.zshrc.ext
-echo "test -f ~/.zshrc.ext && source ~/.zshrc.ext" >> ~/.zshrc
+echo "test -f ~/.zshrc.ext && [[ \${AMITO_ZSH_EXT_LOADED} != "1" ]] && source ~/.zshrc.ext" >> ~/.zshrc
 
 #### ipython
 mkdir -p ~/.ipython/profile_default

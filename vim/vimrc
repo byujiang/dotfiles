@@ -361,6 +361,8 @@ nnoremap te <ESC>:tabedit<cr>
 " Switch to the First Tab "
 nnoremap tf <ESC>:tabfirst<cr>
 
+nnoremap bd <ESC>:bdelete<cr>
+
 "------------------------------------------------------------------------------"
 "" ======>> Autocmd Command <<====== ""
 "" Jump to Where Exited Before

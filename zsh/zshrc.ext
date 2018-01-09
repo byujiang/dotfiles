@@ -1,41 +1,36 @@
 ## Personal bash command Directory
 #########################################
-export DYLD_LIBRARY_PATH=/usr/local/qt/5.5/clang_64/lib
+export AMITO_ZSH_EXT_LOADED=1
 # Command Aliases
 export EDITOR=vim
-alias sb='sudo reboot'
 alias c='clear'
 alias e='exit'
-
-if [[ `uname` == "Darwin" ]]; then
-	alias ls='ls -G'
-else
-	alias ls='ls --color=auto -G'
-fi
-#tinyscheme
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ts='scheme'
-alias sl='ls'
 alias l='ls'
+alias sl='ls'
 alias ll='ls -lh'
 alias la='ls -A'
-alias gp='gnuplot'
-alias g++='g++ -std=c++11 -O2 -Wall'
-alias clang++='clang++ -O2 -Wall'
+alias sb='sudo reboot'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias rm='rm -i'
 alias mr='rm -i'
+alias vi='vim'
+
+#tinyscheme
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ts='scheme'
+
+alias gp='gnuplot'
+alias g++='g++ -std=c++11 -O2 -Wall'
+alias clang++='clang++ -O2 -Wall'
 alias lla='ls -lhA'
 alias iconvf='iconv -f gb18030 -t utf8'
 alias lunart='lunar -h -b --utf8'
 alias lunarf='lunar -h -b -i --utf8'
 alias axels='axel -n 30 -o '
-alias vi='vim'
 alias vimrc='vi ~/.vimrc'
 alias vibash='vi ~/.bash_aliases'
-# alias make='make -j4'
 alias octave='octave --silent'
 alias qs='ps -ef|grep -v grep|grep'
 ######## xelatex ############
@@ -47,6 +42,7 @@ alias tranz='trans :zh'
 
 ################# Mac #################
 if [[ `uname` == "Darwin" ]]; then
+	alias ls='ls -G'
 	alias show='defaults write com.apple.finder AppleShowAllFiles -bool true'
 	alias hide='defaults write com.apple.finder AppleShowAllFiles -bool false'
 	alias updatedb='sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist'
@@ -204,6 +200,7 @@ function open(){
 function sss(){
 	opt=$1
 	json_path=~/tmp/ss/
+	old_path=$(pwd)
 	if [[ $opt == "" ]]; then
 		echo "Usage:\n sss 4/6"
 		return 130
@@ -220,7 +217,7 @@ function sss(){
 	cd ${json_path}
 	ln -fs ss${opt}.json ss.json
 	sudo systemctl restart gcm
-	cd -
+	cd ${old_path}
 }
 
 function luac(){
@@ -251,3 +248,32 @@ function pyc(){
 function calc(){
 	pyc "$*"
 }
+
+############
+ZSH_THEME="bureau"
+plugin=(
+	cp
+	dnf
+	git
+	pip
+	python
+	rsync
+	ssh-agent
+	sudo
+	systemd
+	vim-interaction
+	shell
+)
+
+
+function test_ssh(){
+	ssh -q "$1" exit && echo connected || echo disconnected
+}
+
+function quote_today(){
+	echo "############# Quote of The Day #############"
+	fortune | cowsay -f tux
+	# echo "=============================================================="
+}
+
+quote_today
