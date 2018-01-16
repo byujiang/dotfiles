@@ -1,44 +1,12 @@
 ## Personal bash command Directory
 #########################################
-export AMITO_ZSH_EXT_LOADED=1
 # Command Aliases
-export EDITOR=vim
-alias c='clear'
-alias e='exit'
-alias l='ls'
-alias sl='ls'
-alias ll='ls -lh'
-alias la='ls -A'
-alias sb='sudo reboot'
-alias md='mkdir -p'
-alias rd='rmdir'
-alias rm='rm -i'
-alias mr='rm -i'
-alias vi='vim'
 
 #tinyscheme
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ts='scheme'
-
-alias gp='gnuplot'
-alias g++='g++ -std=c++11 -O2 -Wall'
-alias clang++='clang++ -O2 -Wall'
-alias lla='ls -lhA'
-alias iconvf='iconv -f gb18030 -t utf8'
 alias lunart='lunar -h -b --utf8'
 alias lunarf='lunar -h -b -i --utf8'
 alias axels='axel -n 30 -o '
-alias vimrc='vi ~/.vimrc'
-alias vibash='vi ~/.bash_aliases'
 alias octave='octave --silent'
-alias qs='ps -ef|grep -v grep|grep'
-######## xelatex ############
-######## git aliases ########
-alias gita='git add -f --all * && git commit -a -m'
-alias gitp='git push origin master'
-alias grep='grep -v grep|grep'
-alias tranz='trans :zh'
 
 ################# Mac #################
 if [[ `uname` == "Darwin" ]]; then
@@ -162,7 +130,7 @@ function revtex(){
 	[[ $? == 0 ]] && xelatex ${file}.tex >/dev/null
 	xelatex ${file}.tex >/dev/null
 	open ${file}.pdf
-	\rm -f ${file}.aux ${file}.log ${file}.bbl ${file}.blg
+	rm -f ${file}.aux ${file}.log ${file}.bbl ${file}.blg
 }
 
 #### ssserver or sslocal
@@ -176,78 +144,14 @@ function rmtex(){
 	test -f *-inc.eps && rm -f *-inc.eps
 }
 
-
-alias pc='proxychains4 -q'
-alias yt='proxychains4 -q youtube-dl --recode-video mp4'
-alias wget='wget --no-check-certificate'
-
 #export http_proxy=127.0.0.1:1080
 #export https_proxy=127.0.0.1:1080
 #export socks_proxy=127.0.0.1:1080
 
 export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
-alias open='evince'
-alias ppv='proxychains4 -q mpv'
 alias gcc='gcc -fdiagnostics-color=always -std=c11'
 alias g++='g++ -fdiagnostics-color=always -std=c++11'
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-function open(){
-	gnome-open "$1" >/dev/null 2>&1
-}
-
-#### sss ###
-function sss(){
-	opt=$1
-	json_path=~/tmp/ss/
-	old_path=$(pwd)
-	if [[ $opt == "" ]]; then
-		echo "Usage:\n sss 4/6"
-		return 130
-	fi
-	if [[ $1 == "0" ]]; then
-		sudo systemctl stop gcm
-		return
-	fi
-	if [[ $1 == "1" ]]; then
-		sudo systemctl restart gcm
-		return
-	fi
-
-	cd ${json_path}
-	ln -fs ss${opt}.json ss.json
-	sudo systemctl restart gcm
-	cd ${old_path}
-}
-
-function luac(){
-	# echo "$*"
-	lua <<- EOF
-		log=math.log;  sqrt=math.sqrt;
-		 sin=math.sin;  sinh=math.sinh;
-		 cos=math.cos;  cosh=math.cosh;
-		 tan=math.tan;  tanh=math.tanh;
-		 abs=math.abs;  flr=math.floor
-		 exp=math.exp;  rand=math.random;
-		 pow=math.pow;  ceil=math.ceil;
-		 max=math.max;  min=math.min;
-		 mod=math.fmod; log10=math.log10;
-		 pi=math.pi;    print($*)
-	EOF
-}
-
-function pyc(){
-	# echo "$*"
-	python3 <<- EOF
-		from math import pi, sin, pow, cos, tan, sinh, cosh, tanh,\
-						  exp, fabs, log, log10, modf, fmod, pow, floor
-		print($*)
-	EOF
-}
-
-function calc(){
-	pyc "$*"
-}
 
 ############
 ZSH_THEME="bureau"
@@ -264,16 +168,3 @@ plugin=(
 	vim-interaction
 	shell
 )
-
-
-function test_ssh(){
-	ssh -q "$1" exit && echo connected || echo disconnected
-}
-
-function quote_today(){
-	echo "############# Quote of The Day #############"
-	fortune | cowsay -f tux
-	# echo "=============================================================="
-}
-
-quote_today

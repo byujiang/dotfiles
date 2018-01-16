@@ -1,57 +1,14 @@
 ## Personal bash command Directory
-export AMITO_BASH_EXT_LOADED=1
 ### PS1
 PS1="\[\033[1;32m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;35m\]\u@\h';fi)\[\033[1;32m\])\342\224\200(\[\033[1;31m\]\$?\[\033[1;32m\])\342\224\200(\[\033[1;36m\]\@ \d\[\033[1;32m\])\n\342\224\224[\[\033[1;33m\]\w\[\033[1;32m\]]\342\224\200\[\033[1;31m\]|> \[\033[0m\]"
 #PS1="\[\033[1;32m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;35m\]\u@\h';fi)\[\033[1;32m\])\342\224\200(\[\033[1;31m\]\$?\[\033[1;32m\])\342\224\200(\[\033[1;36m\]\@ \d\[\033[1;32m\])\n\342\224\224\342\224\200[\[\033[1;33m\]\w\[\033[1;32m\]]\342\224\200\[\033[1;31m\]|> \[\033[0m\]"
-#### Personal PATH
 
 #########################################
-export PATH=$PATH:$HOME/usr/bin:$HOME/bin:/usr/local/sbin:$HOME/Workspace/rismom/analysis/python
-# export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/Qt/5.3/clang_64/include
-#export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/Qt/5.3/clang_64/include
-#export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/Qt/5.3/clang_64/lib
 # Command Aliases
-alias sb='sudo reboot'
-alias c='clear'
-alias e='exit'
-if [[ `uname -s` == "Darwin" ]]; then
-	alias ls='ls -G'
-else
-	alias ls='ls --color=auto -G'
-fi
-#tinyscheme
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ts='scheme'
-alias sl='ls'
-alias l='ls'
-alias ll='ls -lh'
-alias la='ls -A'
-alias gp='gnuplot'
-alias g++='g++ -std=c++11 -O2 -Wall'
-alias clang++='clang++ -O2 -Wall'
-alias md='mkdir -p'
-alias rd='rmdir'
-alias rm='rm -i'
-alias mr='rm -i'
-alias lla='ls -lhA'
 alias iconvf='iconv -f gb18030 -t utf8'
 alias lunart='lunar -h -b --utf8'
 alias lunarf='lunar -h -b -i --utf8'
 alias axels='axel -n 30 -o '
-alias vi='vim'
-alias vimrc='vi ~/.vimrc'
-alias vibash='vi ~/.bash_aliases'
-# alias make='make -j4'
-alias octave='octave --silent'
-alias qs='ps -ef|grep -v grep|grep'
-alias tranz='trans :zh'
-
-####### xelatex ############
-alias rmtex='rm -rf *.aux *.lof *.lot *.out *.toc *.synctex.gz* *.log *-inc.eps'
-####### git aliases ########
-alias gita='git add -f --all * && git commit -a -m'
-alias gitp='git push origin master'
 
 ################ Mac ########################
 if [[ `uname` == "Darwin" ]]; then
@@ -127,84 +84,3 @@ function g2u(){
 	iconv -f gb18030 -t utf-8 "$input" > "$output"
 }
 ###---------------------------------------------------###
-if [[ -e ~/.testrc ]]; then
-	source ~/.testrc
-fi
-
-function ssstart(){
-	config=$1
-	test -e $config || return
-	nohup sslocal -q -c $config >/dev/null 2>&1 ^
-}
-###---------------------------------------------------###
-# xqcd and x settings
-if [[ -x $HOME/Bin/xqcd/x/bin/xqcdio.calc ]]; then
-	export xpath="$HOME/Bin/xqcd/x/"
-	export PATH=$PATH:$HOME/Bin/xqcd/x/bin
-fi
-
-function is_login_shell(){
-	ret=(`shopt login_shell`)
-	if [[ ${ret[1]} == "on" ]]; then
-		export LANG=en_US.UTF-8
-		export LC_CTYPE=en_US.UTF-8
-	fi
-}
-is_login_shell
-
-export LANG=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-
-
-#### sss ###
-function sss(){
-	opt=$1
-	json_path=~/tmp/ss/
-	if [[ $opt == "" ]]; then
-		echo "Usage:\n sss 4/6"
-		return 130
-	fi
-	if [[ $1 == "0" ]]; then
-		sudo systemctl stop gcm
-		return
-	fi
-	if [[ $1 == "1" ]]; then
-		sudo systemctl restart gcm
-		return
-	fi
-
-	cd ${json_path}
-	ln -fs ss${opt}.json ss.json
-	sudo systemctl restart gcm
-	cd -
-}
-
-function luac(){
-	# echo "$*"
-	lua <<- EOF
-		log=math.log;  sqrt=math.sqrt;
-		 sin=math.sin;  sinh=math.sinh;
-		 cos=math.cos;  cosh=math.cosh;
-		 tan=math.tan;  tanh=math.tanh;
-		 abs=math.abs;  flr=math.floor
-		 exp=math.exp;  rand=math.random;
-		 pow=math.pow;  ceil=math.ceil;
-		 max=math.max;  min=math.min;
-		 mod=math.fmod; log10=math.log10;
-		 pi=math.pi;    print($*)
-	EOF
-}
-
-function pyc(){
-	# echo "$*"
-	python3 <<- EOF
-		from math import pi, sin, pow, cos, tan, sinh, cosh, tanh,\
-						  exp, fabs, log, log10, modf, fmod, pow, floor
-		print($*)
-	EOF
-}
-
-function calc(){
-	pyc "$*"
-}
-
