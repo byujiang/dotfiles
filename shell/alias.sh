@@ -1,22 +1,13 @@
-########## common config #########
-export LANG=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-
-export EDITOR=vim
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
-export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
-export PATH=$HOME/usr/bin:/usr/local/bin:/usr/local/sbin:$PATH
-export PATH=$PATH:$HOME/Workspace/rismom/analysis/pyhton
-
 ####### system related #######
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -h now'
 
-command -v apt && alias update='sudo apt update && sudo apt upgrade'
-command -v dnf && alias update='sudo dnf makecache && sudo dnf update'
-command -v pip2 && alias pip2_update="sudo pip install -U ($(pip freeze|awk -F = '{print $1}'|tr '\n' ' ')) pip"
-command -v pip3 && alias pip3_update="sudo pip3 install -U ($(pip freeze|awk -F = '{print $1}'|tr '\n' ' ')) pip"
+alias update='sudo apt update && sudo apt upgrade'
+alias update='sudo dnf makecache && sudo dnf update'
+
+alias myip='curl ifconfig.me'
+alias chrome='`which google-chrome`'
+alias open='gnome-open >/dev/null 2>&1'
 
 #######
 alias c='clear'
@@ -46,6 +37,11 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+alias ps='ps aux'
+alias ff='find . -type f -name'
+alias psg='ps|grep -v grep|grep -i -eVSZ -e'
+
+####
 alias tranz='trans :zh'
 alias pc='proxychains4 -q'
 alias yt='pc -q youtube-dl'
@@ -53,11 +49,27 @@ alias ppv='proxychains4 -q mpv'
 alias rsync='rsync -Pz --rsh=ssh -6'
 alias wget='wget -c --no-check-certificate'
 
-command -v bc  && alias bc='bc -l'
-command -v gnuplot && alias gp='gnuplot'
-command -v vim && alias vi='vim' && alias ee='vim'
-command -v openssl && alias sha256='openssl sha1 -sha256'
+
+alias bc='bc -l'
+alias gp='gnuplot'
+alias vi='vim'
+alias ee='vim'
+alias sha256='openssl sha1 -sha256'
 
 #### git
 alias gitp='git push origin master'
 alias gita='git add -f --all * && git commit -a -m'
+
+#### Python
+alias py2='python2'
+alias py3='python3'
+
+alias ipy2='ipython2 --no-banner'
+alias ipy3='ipython3 --no-banner'
+
+command -v python3 >/dev/null && alias py='python3' || alias py='python2'
+command -v ipython3 >/dev/null && alias ipy='ipython3 --no-banner' || alias ipy='ipython2 --no-banner'
+alias pip2_update="sudo pip2 install -U \$(pip2 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
+alias pip3_update="sudo pip3 install -U \$(pip3 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
+####
+

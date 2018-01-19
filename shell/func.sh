@@ -7,7 +7,7 @@ function test_ssh(){
 	ssh $1 exit >/dev/null 2&1 && echo "$1" connected || echo "$1" disconnected
 }
 #### cowsay
-if  [[ command -v fortune && command -v cowsay ]]; then
+if  [[ $(command -v fortune) != "" && $(command -v cowsay) != "" ]]; then
 	function quote_today(){
 		echo "############# Quote of The Day #############"
 		fortune | cowsay -f tux

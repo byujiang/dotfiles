@@ -1,18 +1,16 @@
-#!/bin/bash -
-
+#### zsh
 current_path=$(pwd -P)
 
-ln -sf ${current_path}/bash/bashrc.ext ~/.bashrc.ext
-ln -sf ${current_path}/zsh/zshrc.ext ~/.zshrc.ext
-ln -sf ${current_path}/shell/func.sh ~/.func.ext
-ln -sf ${current_path}/shell/alias.sh ~/.alias.ext
+grep -q "export dotfile_path=${current_path}" ~/.zshrc|| echo "export dotfile_path=${current_path}" >> ~/.zshrc
+grep -q "export dotfile_path=${current_path}" ~/.bashrc|| echo "export dotfile_path=${current_path}" >> ~/.bashrc
 
-grep -q "test -f ~/.bashrc.ext" ~/.bashrc || echo "test -f ~/.bashrc.ext && source ~/.bashrc.ext" >> ~/.bashrc
-grep -q "test -f ~/.func.ext" ~/.bashrc || echo "test -f ~/.func.ext && source ~/.func.ext" >> ~/.bashrc
-grep -q "test -f ~/.alias.ext" ~/.bashrc || echo "test -f ~/.alias.ext && source ~/.alias.ext" >> ~/.bashrc
-grep -q "test -f ~/.zshrc.ext" ~/.zshrc || echo "test -f ~/.zshrc.ext && source ~/.zshrc.ext" >> ~/.zshrc
-grep -q "test -f ~/.func.ext" ~/.zshrc || echo "test -f ~/.func.ext && source ~/.func.ext" >> ~/.zshrc
-grep -q "test -f ~/.alias.ext" ~/.zshrc || echo "test -f ~/.alias.ext && source ~/.alias.ext" >> ~/.zshrc
+grep -q "source ${current_path}/shell/shell.sh" ~/.zshrc || echo "source ${current_path}/shell/shell.sh" >> ~/.zshrc
+grep -q "source ${current_path}/shell/shell.sh" ~/.bashrc || echo "source ${current_path}/shell/shell.sh" >> ~/.bashrc
+
+ln -sf ${current_path}/shell/alias.sh ~/.alias.ext
+ln -sf ${current_path}/shell/macos.sh ~/.macos.ext
+ln -sf ${current_path}/shell/comm.sh ~/.comm.ext
+ln -sf ${current_path}/shell/func.sh ~/.func.ext
 
 #### ipython
 mkdir -p ~/.ipython/profile_default
@@ -27,4 +25,4 @@ ln -sf ${current_path}/ipython/profile/startup ~/.ipython/profile_default/
 ln -sf ${current_path}/tmux/tmux.conf ~/.tmux.conf
 ln -sf ${current_path}/vim/vimrc ~/.vimrc
 mkdir -p ~/.config && rm -rf ~/.config/mpv
-ln -sf ${current_path}/mpv ~/.config/mpv
+ln -sf ${current_path}/mpv ~/.config/
