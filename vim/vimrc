@@ -49,7 +49,7 @@ let vundle_readme=expand($VIMFILES.'/vundle/README.md')
 if !filereadable(vundle_readme)
 	echo "Installing vundle now!!!"
 	echo ""
-	silent !mkdir -p $VIMFILES.vundle
+	silent !mkdir -p $VIMFILES'vundle'
 	if !executable('git')
 		echo "You don't seem to have git installed. Please exit vim and install git"
 	else

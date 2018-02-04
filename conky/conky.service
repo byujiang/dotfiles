@@ -1,0 +1,15 @@
+[Unit]
+Description=Shadowsocks server service for ipv6
+After=syslog.target network.target auditd.service
+
+[Service]
+Type=simple
+User=amito
+Environment=CONFile="/home/amito/.conkyrc"
+ExecStart=/usr/bin/conky -c $CONFile -d
+
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

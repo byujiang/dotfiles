@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Conky
+Name[zh_CN]=Conky
+Comment=Conky
+Comment[zh_CN]=获得 GNOME 的帮助
+Comment[zu]=Thola usizo nge GNOME
+Keywords=documentation;information;manual;help;
+Keywords[zh_CN]=documentation;information;manual;help;文档;信息;手册;帮助;
+OnlyShowIn=GNOME;Unity;
+Exec=/home/amito/usr/bin/conky.sh > /home/amito/.dotfiles/conky/conky.log
+Icon=help-browser
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Core;Documentation;Utility;
+X-GNOME-Bugzilla-Bugzilla=GNOME
+X-GNOME-Bugzilla-Product=Yelp
+X-GNOME-Bugzilla-Component=general
+X-GNOME-Bugzilla-Version=3.26.0
+MimeType=x-scheme-handler/ghelp;x-scheme-handler/help;x-scheme-handler/info;x-scheme-handler/man;
