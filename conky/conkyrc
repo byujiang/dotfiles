@@ -42,14 +42,14 @@ conky.config = {
 
 conky.text = [[
 ####### System Info #########
-${image /home/amito/.dotfiles/conky/fedora.png -s 80x80}${voffset -5}
+${image /home/amito/.dotfiles/conky/img/fedora.png -s 80x80}${voffset -5}
 ${offset 95}${font DejaVu:size=34}${color black}${time %I}${voffset -5}:${voffset 5}${time %M}$font$color
-${image /home/amito/.dotfiles/conky/b.png -p 82,4 -s 156x80}
+${image /home/amito/.dotfiles/conky/img/b.png -p 82,4 -s 156x80}
 ${voffset -75}${font DejaVu:size=10}${offset 242}${color black}${time %A}${font}
 ${voffset -10}${font DejaVu:size=32}${color black}${offset 242}${time %d}$font
 ${voffset -48}${font DejaVu:size=36}${offset 305}${time %m}$font$color
-${voffset 95}${image /home/amito/.dotfiles/conky/c.png -p 230,4 -s 80x80}${voffset -90}
-${voffset 95}${image /home/amito/.dotfiles/conky/c.png -p 295,4 -s 80x80}${voffset -120}
+${voffset 95}${image /home/amito/.dotfiles/conky/img/c.png -p 230,4 -s 80x80}${voffset -90}
+${voffset 95}${image /home/amito/.dotfiles/conky/img/c.png -p 295,4 -s 80x80}${voffset -120}
 $alignc${font Verdana:size=14}${color white}${execpi 60 whoami}@${execpi 60 uname -n}    ${execpi 60 cat /etc/redhat-release|awk '{print $1 " " $3}'}   ${machine} $font
 #######  Machine Info #######
 ${voffset 5}${color cyan}System: ${voffset -2}${stippled_hr 3,}$color

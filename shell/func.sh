@@ -1,11 +1,4 @@
 ######################## useful functions ########################
-function test_conn(){
-	ping -c 2 "$1" >/dev/null 2>&1 && echo "$1" connected || echo "$1" disconnected
-}
-
-function test_ssh(){
-	ssh $1 exit >/dev/null 2&1 && echo "$1" connected || echo "$1" disconnected
-}
 #### cowsay
 if  [[ $(command -v fortune) != "" && $(command -v cowsay) != "" ]]; then
 	function quote_today(){
@@ -80,4 +73,25 @@ function ssstart(){
 	logfile=${config//json/log}
 	pidfile=${config/json/pid}
 	ssserver -q -c $config --pid-file $pidfile --log-file $logfile -d start
+}
+
+###################################################################################
+
+function test_conn(){
+	ping -c 2 "$1" >/dev/null 2>&1 && echo "$1" connected || echo "$1" disconnected
+}
+
+function test_ssh(){
+	ssh $1 exit >/dev/null 2&1 && echo "$1" connected || echo "$1" disconnected
+}
+
+function conn_check(){
+	if [[ $# != 1 ]]; then
+		echo -e "Usage:\n conn_check node.lst"
+		exit 130
+	fi
+	parallel -j 100 "ping -i 0.2 -c 2 {} >/dev/null 2>&1 || echo -e \"\t\033[0;31m cmbsd{} disconnected\033[0m\"" ::: < $1
+}
+function conn_check2(){
+	parallel -j 100 "ping -i 0.2 -c 2 {} >/dev/null 2>&1 || echo -e \"\t\033[0;31m cmbsd{} disconnected\033[0m\"" ::: $*
 }
