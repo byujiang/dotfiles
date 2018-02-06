@@ -88,7 +88,7 @@ function test_ssh(){
 function conn_check(){
 	if [[ $# != 1 ]]; then
 		echo -e "Usage:\n conn_check node.lst"
-		exit 130
+		return 130
 	fi
 	parallel -j 100 "ping -i 0.2 -c 2 {} >/dev/null 2>&1 || echo -e \"\t\033[0;31m cmbsd{} disconnected\033[0m\"" ::: < $1
 }
