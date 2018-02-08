@@ -94,3 +94,11 @@ alias pip3_update="sudo pip3 install -U \$(pip3 freeze|awk -F = '{print \$1}'|tr
 ####
 command -v evince >/dev/null 2>&1 && alias acroread='evince'
 command -v okular >/dev/null 2>&1 && alias acroread='okular'
+
+#### Terminology
+command -v tycat >/dev/null 2>&1 && alias catimg='tycat -g 192x108 '
+
+#### SBATCH
+command -v squeue >/dev/null 2>&1 && alias qs='squeue -u $(whoami)' && alias sq='qs'
+
+

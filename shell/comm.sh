@@ -52,3 +52,11 @@ if [[ -d $HOME/Workspace/xqcd/x/bin ]]; then
 	export PATH=$PATH:$HOME/Workspace/xqcd/x/bin
 fi
 
+
+
+######## conky ##########
+
+if [[ -x $HOME/usr/bin/conky.sh && $(pgrep conky) = "" ]]; then
+	echo "Starting conky daemon"
+	$HOME/usr/bin/conky.sh >/dev/null 2>&1
+fi
