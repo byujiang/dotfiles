@@ -24,6 +24,8 @@ ln -sf ${dotfile_path}/ipython/profile/startup ~/.ipython/profile_default/
 ####
 ln -sf ${dotfile_path}/tmux/tmux.conf ~/.tmux.conf
 ln -sf ${dotfile_path}/vim/vimrc ~/.vimrc
-ln -sf ${dotfile_path}/conky/conkyrc ~/.conkyrc
 mkdir -p ~/.config && rm -rf ~/.config/mpv
 ln -sf ${dotfile_path}/mpv ~/.config/
+
+mkdir -p $HOME/usr/bin
+ln -sf ${dotfile_path}/conky/conky.sh ~/usr/bin/
