@@ -1,4 +1,6 @@
 ####### system related #######
+####### vim: ts=4 sw=4 ft=sh
+
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -h now'
 
@@ -71,6 +73,7 @@ alias bc='bc -l'
 alias gp='gnuplot'
 alias vi='vim'
 alias ee='vim'
+alias :q='tput setaf 1;echo >&2 "This is not Vi(m) \::/"; tput sgr0'
 alias sha256='openssl sha1 -sha256'
 
 #### git
@@ -101,4 +104,11 @@ command -v tycat >/dev/null 2>&1 && alias catimg='tycat -g 192x108 '
 #### SBATCH
 command -v squeue >/dev/null 2>&1 && alias qs='squeue -u $(whoami)' && alias sq='qs'
 
+
+#### hexo
+if [[ $(command -v hexo) != "" ]]; then
+	alias hc='hexo clean'
+	alias hg='hexo generate'
+	alias hs='hexo server'
+fi
 

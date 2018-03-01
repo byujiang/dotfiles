@@ -1,4 +1,6 @@
 ####################### common configuration #####################
+#### vim: ts=4 sw=4 ft=sh
+
 #### system part
 export EDITOR=vim
 export LANG=en_US.UTF-8
@@ -7,9 +9,9 @@ export LC_CTYPE=en_US.UTF-8
 
 #### proxy
 # export all_proxy=socks5://127.0.0.1:1080
- export http_proxy=socks5://127.0.0.1:1080
- export https_proxy=socks5://127.0.0.1:1080
- export socks_proxy=socks5://127.0.0.1:1080
+# export http_proxy=socks5://127.0.0.1:1080
+# export https_proxy=socks5://127.0.0.1:1080
+# export socks_proxy=socks5://127.0.0.1:1080
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
 	export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
@@ -52,11 +54,9 @@ if [[ -d $HOME/Workspace/xqcd/x/bin ]]; then
 	export PATH=$PATH:$HOME/Workspace/xqcd/x/bin
 fi
 
-
-
 ######## conky ##########
 
-if [[ -x $HOME/usr/bin/conky.sh && $(pgrep conky) = "" ]]; then
+if [[ -x $HOME/usr/bin/conky.sh && $(pgrep conky) = "" && $(command -v conky) != "" ]]; then
 	echo "Starting conky daemon"
 	$HOME/usr/bin/conky.sh >/dev/null 2>&1
 fi

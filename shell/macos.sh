@@ -1,4 +1,5 @@
 ############################ macOS #######################
+#### vim: ts=4 sw=4 ft=sh
 if [[ `uname` == "Darwin" ]]; then
 	########## alias #########
 	alias ls='ls -G'

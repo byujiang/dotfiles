@@ -1,34 +1,31 @@
-use_xft yes
-xftfont Segoe UI:size=35
+#!/usr/bin/conky -d -c
+-- vim: ts=4 sw=4 noet ai cindent syntax=lua
+-- [[ forked from default config ]]
+conky.config= {
+	use_xft = true,
+	update_interval = 1,
+	total_run_times = 0,
+	double_buffer = true,
+	text_buffer_size = 2048,
+	own_window = true,
+	own_window_type = 'normal',
+	own_window_transparent = true,
+	default_color='595959',
+	maximum_width=580,
+	alignment='br',
+	gap_x=600,
+	gap_y=680,
+	draw_shades=false,
+	no_buffers= false,
+	net_avg_samples=2,
+	override_utf8_locale=true,
+	imlib_cache_size=0,
+	short_units=true,
+	minimum_height = 350,
+	minimum_width = 580,
+	own_window_hints='undecorated,below,sticky,skip_taskbar,skip_pager'
+}
 
-update_interval 1
-total_run_times 0
-double_buffer yes
-text_buffer_size 2048
-
-own_window yes
-own_window_type normal
-own_window_transparent yes
-own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
-
-minimum_size 580 350
-maximum_width 580
-
-default_color 595959
-draw_shades no
-
-alignment br
-gap_x 600
-gap_y 680
-
-no_buffers no
-net_avg_samples 2
-
-override_utf8_locale yes
-
-no_buffers yes
-imlib_cache_size 0
-short_units yes
-
-TEXT
+conky.text=[[
 ${execpi 10 ~/.dotfiles/conky/slide.sh ~/Pictures/lovewallpaper large}
+]]

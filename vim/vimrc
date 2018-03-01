@@ -462,7 +462,7 @@ set tags+=../include/tags
 set tags+=/usr/include/tags
 " ==========>> CloseTags  <<========== "
 let g:closetag_html_style=1
-au filetype html,xml,xsl,wiki,css,md,MD  source $VIMFILES/closetag/plugin/closetag.vim
+"au filetype html,xml,xsl,wiki,css,md,MD  source $VIMFILES/closetag/plugin/closetag.vim
 
 " =======>> cppSyntaxChecher <<======= "
 let g:compile_flag="_D_LINUX_"

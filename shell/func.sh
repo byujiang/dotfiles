@@ -1,13 +1,33 @@
 ######################## useful functions ########################
+## vim: ts=4 sw=4 ft=sh
+
 #### cowsay
+function quote_today(){
+	echo "############# Quote of The Day #############"
+	fortune | cowsay -f tux
+}
 if  [[ $(command -v fortune) != "" && $(command -v cowsay) != "" ]]; then
-	function quote_today(){
-		echo "############# Quote of The Day #############"
-		fortune | cowsay -f tux
-		# echo "=============================================================="
-	}
 	quote_today
 fi
+
+function mv_cut(){
+	fs="$1"
+	st=$2
+	if [[ $# == 3 ]]; then
+		ed=$3
+		ffmpeg -i "$fs" -ss $st -to $ed -async 1 -c copy /tmp/dddddd.mp4
+	else
+		ffmpeg -i "$fs" -ss $st -async 1 -c copy /tmp/dddddd.mp4
+	fi
+	read replace
+	if [[ $replace = '1' ]]; then
+		mv /tmp/dddddd.mp4 "$fs"
+		echo "will replace original video with cutted video"
+	else
+		echo "won't replace original video"
+	fi
+}
+
 
 function luac(){
 	# echo "$*"
@@ -60,27 +80,66 @@ function gcm(){
 }
 function sss(){
 	json_path=~/tmp/ss
-	if [[ $# != 1 ]];then
-		echo "Usage:\n gcm 0/4/6"
+	mm="gcm"
+	# mm="libev"
+	if [[ $# != 1 && $# != 2 ]]; then
+		echo "Usage:\n sss 0/4/6 [gcm/libev]"
 		return 130
 	fi
 	if [[ $1 == "0" ]]; then
-		sudo systemctl stop libev
+		sudo systemctl stop $mm
 		return
 	fi
-	echo "Json path: ${json_path}"
+	if [[ $# == 2 ]]; then
+		mm=$2
+	fi
+	if [[ $mm != "gcm" && $mm != "libev" ]];then
+		echo "\$2 can be 'gcm' or 'libev' only."
+		return 200
+	fi
+	echo "json path: ${json_path}"
 	if [[ $1 == "4" || $1 == "6" ]]; then
-		echo "Linking libev${1}.json to libev.json"
-		ln -sf ${json_path}/libev${1}.json ${json_path}/libev.json
-		echo "Restart libev service"
-		sudo systemctl restart libev
+		echo "Linking ${mm}${1}.json to ${mm}.json"
+		ln -sf ${json_path}/${mm}${1}.json ${json_path}/${mm}.json
+		echo "Restart gcm service"
+		sudo systemctl restart $mm
 	else
 		echo "Option not acceptable. Only 0/4/6 are acceptable"
 		return 130
 	fi
 }
-###################################################################################
 
+function lpr2(){
+	tmp_file=$(mktemp -u).$(date +"%Y.%m.%d.%H.%M").pdf
+	if [[ $# -ne 1 && $# -ne 2 ]];then
+		echo "This function is for printing file under linux in both side"
+		echo -e "Usage:\n\t $(basename $0) file [page_range]"
+		return 130
+	fi
+	if [[ $# == 1 ]]; then
+		cp "$1" $tmp_file
+	else
+		if [[ $(command -v pdf-stapler) == "" ]]; then
+			echo "You don't have pdf-stapler on your system. Please install pdf-stapler"
+			return 150
+		fi
+		pdf-stapler cat "$1" "$2" $tmp_file
+		if [[ $? != 0 ]]; then
+			echo "The page-range you enter is not acceptable"
+			return 130
+		fi
+	fi
+	echo "Begin printing your document $1 now, tmp_file: $tmp_file"
+	lpr -P ihep -o page-set=even -o fit-to-page -o outputorder=reverse -o orientation-requested=6 $tmp_file
+	echo -en "Now put papers back to printer, and press return"
+	read
+	lpr -P ihep -o page-set=odd  -o fit-to-page $tmp_file
+	echo "Finish printing your document $1, tmp_file: $tmp_file"
+	rm -f $tmp_file
+	echo "Delete tmp_file: $tmp_file"
+}
+
+###################################################################################
 function test_conn(){
 	ping -c 2 "$1" >/dev/null 2>&1 && echo "$1" connected || echo "$1" disconnected
 }
