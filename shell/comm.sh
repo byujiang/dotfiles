@@ -17,7 +17,7 @@ if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
 	export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
 fi
 
-export PATH=$HOME/usr/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/usr/bin:$HOME/usr/scripts:/usr/local/bin:/usr/local/sbin:$PATH
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
@@ -56,7 +56,7 @@ fi
 
 ######## conky ##########
 
-if [[ -x $HOME/usr/bin/conky.sh && $(pgrep conky) = "" && $(command -v conky) != "" ]]; then
+if [[ -x $HOME/usr/scripts/conky.sh && $(pgrep conky) = "" && $(command -v conky) != "" ]]; then
 	echo "Starting conky daemon"
-	$HOME/usr/bin/conky.sh >/dev/null 2>&1
+	$HOME/usr/scripts/conky.sh >/dev/null 2>&1
 fi
