@@ -14,8 +14,9 @@ fi
 if [[ $(command -v yum) != "" ]]; then
 	function update(){
 		command -v dnf >/dev/null && up='dnf' || up='yum'
-		sudo $up makecache && sudo $up update -y
-		sudo $up list installed |grep 'x86_64\|noarch\|i686'|awk '{print $1}' > $HOME/Dropbox/Linux/Fedora/rpm.lst
+		command -v proxychains4 >/dev/null && proxy='proxychains4' || proxy=''
+		sudo $proxy $up makecache && sudo $up update -y
+		sudo $proxy $up list installed |grep 'x86_64\|noarch\|i686'|awk '{print $1}' > $HOME/Dropbox/System/Linux/rpm.lst
 	}
 fi
 
