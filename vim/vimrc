@@ -67,9 +67,7 @@ Plugin 'jQuery'
 Plugin 'Vimball'
 Plugin 'vimwiki'
 " Plugin 'yegappan/mru'
-Plugin 'gmarik/vundle'
 Plugin 'yegappan/grep'
-Plugin 'bash-support.vim',{'name':'bash-support'}
 Plugin 'rkulla/pydiction'
 Plugin 'wesleyche/SrcExpl'
 Plugin 'scrooloose/nerdtree'
@@ -109,11 +107,13 @@ Plugin 'calendar.vim',{'name':'calendar'}
 "Plugin 'closetag.vim', {'name': 'closetag'}
 " Plugin 'darkshell/netrw.vim',{'name':'netrw'}
 Plugin 'vim-scripts/c.vim',{'name':'cvim'}
-"Plugin 'davidhalter/jedi-vim',{'name':'jedi'}
+Plugin 'lilydjwg/fcitx.vim', {'name':'fcitx'}
+Plugin 'davidhalter/jedi-vim',{'name':'jedi'}
+Plugin 'VundleVim/Vundle.vim', {'name':'vuldle'}
+Plugin 'bash-support.vim',{'name':'bash-support'}
 Plugin 'darkshell/ColorSchemes',{'name':'colors'}
 Plugin 'kevinw/pyflakes-vim',{'name':'pyflakes'}
 " Plugin 'vim-pandoc/vim-pandoc',{'name':'pandoc'}
-"Plugin 'perl-support.vim',{'name':'perl-support'}
 "Plugin 'vim-scripts/blogit.vim',{'name':'blogit'}
 Plugin 'basilgor/vim-autotags',{'name':'autotags'}
 Plugin 'docunext/closetag.vim',{'name':'closetag'}

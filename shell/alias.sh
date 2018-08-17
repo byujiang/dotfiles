@@ -4,6 +4,10 @@
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -h now'
 
+# command -v apt >/dev/null && export DNF='apt'
+# command -v dnf >/dev/null && export DNF='dnf'
+# [ -z $DNF ] || export DNF='yum'
+
 if [[ $(command -v apt) != "" ]]; then
 	function update(){
 		sudo apt makecache && sudo apt update && sudo apt upgrade -y
@@ -13,13 +17,24 @@ fi
 
 if [[ $(command -v yum) != "" ]]; then
 	function update(){
-		command -v dnf >/dev/null && up='dnf' || up='yum'
 		command -v proxychains4 >/dev/null && proxy='proxychains4' || proxy=''
-		sudo $proxy $up makecache && sudo $up update -y
-		sudo $proxy $up list installed |grep 'x86_64\|noarch\|i686'|awk '{print $1}' > $HOME/Dropbox/System/Linux/rpm.lst
+		sudo $proxy yum makecache && sudo $proxy yum update -y
+		sudo $proxy yum list installed|awk '/(x86_64|i686|noarch)/ {print $1}' > $HOME/Dropbox/System/Linux/rpm.lst
 	}
+	alias app_count="sudo pc yum list installed |awk '/(x86_64|i686|noarch)/ {print \$1}'|wc -l"
 fi
 
+if [[ $(command -v dnf) != "" ]]; then
+	function update(){
+		command -v proxychains4 >/dev/null && proxy='proxychains4' || proxy=''
+		sudo $proxy dnf makecache && sudo $proxy dnf update -y
+		sudo $proxy dnf list installed|awk '/(x86_64|i686|noarch)/ {print $1}' > $HOME/Dropbox/System/Linux/rpm.lst
+	}
+	alias app_count="sudo pc dnf list installed |awk '/(x86_64|i686|noarch)/ {print \$1}'|wc -l"
+fi
+
+alias ipa="hostname -I"
+alias wpa="watch -n1 'hostname -I'"
 # alias myip='echo $(wget --no-proxy -O - -q ident.me)'
 alias myip='echo $(wget -O - -q ident.me)'
 # alias myip1='curl ifconfig.me ifconfig.me'
@@ -39,6 +54,7 @@ alias sl='ls'
 alias la='ls -A'
 alias ll='ls -lh'
 alias lla='ls -lhA'
+alias lsa='ls -lhA'
 
 alias rd='rmdir'
 alias md='mkdir -pv'
@@ -51,8 +67,10 @@ alias ...='cd ../..'
 alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
-alias e.='gnome-open . >/dev/null 2>&1'
+alias e.='nautilus . >/dev/null 2>&1 &'
 
+#### network
+alias v6='ping -c 4 -6 amito.me'
 #### grep ####
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -63,8 +81,8 @@ alias ff='find . -type f -name'
 alias psg='ps|grep -v grep|grep -i -e " PID " -e VSZ -e'
 
 ####
-alias tranz='trans :zh'
-alias pc='proxychains4 -q'
+alias tran='trans :zh'
+[[ ! -x /usr/bin/pc ]] && alias pc='proxychains4 -q'
 alias yt='pc -q youtube-dl'
 alias ppv='proxychains4 -q mpv'
 alias rsync='rsync -Pz --rsh=ssh -6'
@@ -74,7 +92,7 @@ alias bc='bc -l'
 alias gp='gnuplot'
 alias vi='vim'
 alias ee='vim'
-alias :q='tput setaf 1;echo >&2 "This is not Vi(m) \::/"; tput sgr0'
+# alias :q='tput setaf 1;echo >&2 "This is not Vi(m) \::/"; tput sgr0'
 alias sha256='openssl sha1 -sha256'
 
 #### git
@@ -90,8 +108,8 @@ alias ipy3='ipython3 --no-banner'
 
 command -v python3 >/dev/null && alias py='python3' || alias py='python2'
 command -v ipython3 >/dev/null && alias ipy='ipython3 --no-banner' || alias ipy='ipython2 --no-banner'
-alias pip2_update="sudo pip2 install -U \$(pip2 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
-alias pip3_update="sudo pip3 install -U \$(pip3 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
+alias pip2_update="sudo pc pip2 install -U \$(pip2 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
+alias pip3_update="sudo pc pip3 install -U \$(pip3 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
 ####
 
 
@@ -113,3 +131,21 @@ if [[ $(command -v hexo) != "" ]]; then
 	alias hs='hexo server'
 fi
 
+###dnf
+alias di='sudo dnf install -6y'
+alias di6='sudo dnf install -6y'
+alias di4='sudo dnf install -4y'
+#### applications
+# alias netmusic="all_proxy=socks://127.0.0.1:1080 /usr/bin/netease-cloud-music %U >/dev/null 2>&1 &"
+alias caps="gsettings set org.gnome.desktop.input-sources xkb-options \"['caps:ctrl_modifier']\""
+alias dark="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'"
+alias pale="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
+
+#### simple functions
+# keep journal
+alias jj='mkdir -p $HOME/Dropbox/Workspace/journal/$(date +%Y); vim "$HOME/Dropbox/Workspace/journal/$(date +%Y)/journal-$(date +%Y-%m-%d).md"'
+alias todo='mkdir -p $HOME/Dropbox/Workspace/todo/$(date +%Y); vim $HOME/Dropbox/Workspace/todo/$(date +%Y)/todo-$(date +%Y-%m).md'
+
+
+####
+alias make_grub2='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'

@@ -1,8 +1,5 @@
 #### zsh
-dotfile_path=$(pwd -P)
-
-grep -q "export dotfile_path=${dotfile_path}" ~/.zshrc|| echo "export dotfile_path=${dotfile_path}" >> ~/.zshrc
-grep -q "export dotfile_path=${dotfile_path}" ~/.bashrc|| echo "export dotfile_path=${dotfile_path}" >> ~/.bashrc
+dotfile_path=$(dirname `readlink -f $0`)
 
 grep -q "source \${dotfile_path}/shell/shell.sh" ~/.zshrc || echo "source \${dotfile_path}/shell/shell.sh" >> ~/.zshrc
 grep -q "source \${dotfile_path}/shell/shell.sh" ~/.bashrc || echo "source \${dotfile_path}/shell/shell.sh" >> ~/.bashrc

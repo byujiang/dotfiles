@@ -3,7 +3,7 @@
 -- [[ forked from default config ]]
 conky.config= {
 	use_xft = true,
-	update_interval = 1,
+	update_interval = 60,
 	total_run_times = 0,
 	double_buffer = true,
 	text_buffer_size = 2048,
@@ -27,5 +27,5 @@ conky.config= {
 }
 
 conky.text=[[
-${execpi 10 ~/.dotfiles/conky/slide.sh ~/Pictures/lovewallpaper large}
+${execpi 120 ~/.dotfiles/conky/slide.sh ~/Pictures/lovewallpaper large}
 ]]

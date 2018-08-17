@@ -6,11 +6,14 @@ export EDITOR=vim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
+export XMODIFIERS=@im=fcitx
 
 #### proxy
 # export all_proxy=socks5://127.0.0.1:1080
-# export http_proxy=socks5://127.0.0.1:1080
-# export https_proxy=socks5://127.0.0.1:1080
+## privoxy
+# export http_proxy=http://127.0.0.1:8080
+# export https_proxy=http://127.0.0.1:8080
+## ss
 # export socks_proxy=socks5://127.0.0.1:1080
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
@@ -19,7 +22,7 @@ fi
 
 export PATH=$HOME/usr/bin:$HOME/usr/scripts:/usr/local/bin:/usr/local/sbin:$PATH
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib:/usr/local/lib:/usr/local/lib64
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
@@ -58,5 +61,12 @@ fi
 
 if [[ -x $HOME/usr/scripts/conky.sh && $(pgrep conky) = "" && $(command -v conky) != "" ]]; then
 	echo "Starting conky daemon"
+	sleep 5
 	$HOME/usr/scripts/conky.sh >/dev/null 2>&1
 fi
+
+
+
+######## Vultr API Key #######
+export vultr_api="JNMAJVOBF3NQL3J6U6GS42CJ7M32MD3JQYFA"
+export vultr_header="API-Key: $vultr_api"

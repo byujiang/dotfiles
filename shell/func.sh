@@ -1,5 +1,11 @@
 ######################## useful functions ########################
 ## vim: ts=4 sw=4 ft=sh
+function :q(){
+	tput setaf 1;
+	echo >&2 'This is not Vi(m) \::/'
+	tput sgr0
+	return 1
+}
 
 #### cowsay
 function quote_today(){
@@ -98,15 +104,31 @@ function sss(){
 		return 200
 	fi
 	echo "json path: ${json_path}"
-	if [[ $1 == "4" || $1 == "6" ]]; then
-		echo "Linking ${mm}${1}.json to ${mm}.json"
-		ln -sf ${json_path}/${mm}${1}.json ${json_path}/${mm}.json
-		echo "Restart gcm service"
-		sudo systemctl restart $mm
-	else
-		echo "Option not acceptable. Only 0/4/6 are acceptable"
-		return 130
-	fi
+	case "$1" in
+		[46])
+			echo "Linking ${mm}${1}.json to ${mm}.json"
+			ln -sf ${json_path}/${mm}${1}.json ${json_path}/${mm}.json
+			echo "Restart gcm service"
+			sudo systemctl restart $mm
+			;;
+		0)
+			echo "Stopping SS serivce"
+			sudo systemctl stop $mm
+			;;
+		1)
+			echo "Start showing log"
+			tail -f /var/log/${mm}.log
+			;;
+		2)
+			ls -lh ${json_path}/${mm}.json
+			echo "q" | sudo systemctl status $mm
+			echo ''
+			;;
+		*)
+			echo "Option not acceptable. Only 0/1/4/6 are acceptable"
+			return 130
+			;;
+	esac
 }
 
 function lpr2(){
@@ -137,6 +159,22 @@ function lpr2(){
 	echo "Finish printing your document $1, tmp_file: $tmp_file"
 	rm -f $tmp_file
 	echo "Delete tmp_file: $tmp_file"
+}
+
+function transmission4(){
+	if [[ $# != 1 ]];then
+		echo -e"Usage:\n\t this_file on/off"
+		return 130
+	fi
+	pkill transmission-gtk
+	if [[ $1 == "on" ]]; then
+		echo "ipv4: 0.0.0.0-255.255.255.255" > ~/.config/transmission/blocklists/ipv4.dat
+	fi
+	if [[ $1 == "off" ]]; then
+		rm -f ~/.config/transmission/blocklists/ipv4.dat*
+	fi
+	transmission-gtk >/dev/null 2>&1 &
+	ls ~/.config/transmission/blocklists
 }
 
 ###################################################################################
