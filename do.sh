@@ -1,8 +1,10 @@
 #### zsh
 dotfile_path=$(dirname `readlink -f $0`)
 
-grep -q "source \${dotfile_path}/shell/shell.sh" ~/.zshrc || echo "source \${dotfile_path}/shell/shell.sh" >> ~/.zshrc
-grep -q "source \${dotfile_path}/shell/shell.sh" ~/.bashrc || echo "source \${dotfile_path}/shell/shell.sh" >> ~/.bashrc
+if [[ test -f $HOME/.zshrc ]]; then
+	grep -q "source ${dotfile_path}/shell/shell.sh" ~/.zshrc || echo "source ${dotfile_path}/shell/shell.sh" >> ~/.zshrc
+fi
+grep -q "source ${dotfile_path}/shell/shell.sh" ~/.bashrc|| echo "source ${dotfile_path}/shell/shell.sh" >> ~/.bashrc
 
 ln -sf ${dotfile_path}/shell/alias.sh ~/.alias.ext
 ln -sf ${dotfile_path}/shell/macos.sh ~/.macos.ext
