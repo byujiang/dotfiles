@@ -1,8 +1,13 @@
 #### zsh
 dotfile_path=$(dirname `readlink -f $0`)
 
+# if [[ ! -f ~/.oh-my-zsh/README.md ]]; then
+	# sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"; exit
+# fi
+
 if [[ -f $HOME/.zshrc ]]; then
 	grep -q "source ${dotfile_path}/shell/shell.sh" ~/.zshrc || echo "source ${dotfile_path}/shell/shell.sh" >> ~/.zshrc
+	echo 'ZSH_THEME="agnoster"' >> ~/.zshrc
 fi
 grep -q "source ${dotfile_path}/shell/shell.sh" ~/.bashrc|| echo "source ${dotfile_path}/shell/shell.sh" >> ~/.bashrc
 

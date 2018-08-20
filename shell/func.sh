@@ -196,3 +196,33 @@ function conn_check(){
 function conn_check2(){
 	parallel -j 100 "ping -i 0.2 -c 2 {} >/dev/null 2>&1 || echo -e \"\t\033[0;31m cmbsd{} disconnected\033[0m\"" ::: $*
 }
+
+
+
+
+
+##################################################################################
+function jj(){
+	Year=$(date +%Y)
+	Mon=$(date +%m)
+	Day=$(date +%d)
+	jpath="$HOME/Dropbox/Workspace/journal/$Year/$Mon"
+	jname="journal.${Year}.${Mon}.${Day}"
+
+	mkdir -p $jpath
+	test -f $jpath/${jname}.md || cp $jpath/../../template.md $jpath/${jname}.md
+	test -f /usr/bin/code >/dev/null && edit="code" || edit="vim"
+	$edit $jpath/${jname}.md >/dev/null 2>&1
+
+}
+
+function todo(){
+	Year=$(date +%Y)
+	Mon=$(date +%m)
+	Day=$(date +%d)
+	mkdir -p ~/Dropbox/Workspace/journal/$Year/$Mon
+	cd ~/Dropbox/Workspace/journal/$Year/$Mon
+	cp ../../template.md todo.${Year}.${Mon}.${Day}.md
+	command -v code >/dev/null && set edit="code" || set edit="vim"
+	$edit todo.${Year}.${Mon}.${daY}.md >/dev/null 2>&1
+}

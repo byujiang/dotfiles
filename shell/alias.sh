@@ -143,8 +143,8 @@ alias pale="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
 
 #### simple functions
 # keep journal
-alias jj='mkdir -p $HOME/Dropbox/Workspace/journal/$(date +%Y); vim "$HOME/Dropbox/Workspace/journal/$(date +%Y)/journal-$(date +%Y-%m-%d).md"'
-alias todo='mkdir -p $HOME/Dropbox/Workspace/todo/$(date +%Y); vim $HOME/Dropbox/Workspace/todo/$(date +%Y)/todo-$(date +%Y-%m).md'
+# alias jj='mkdir -p $HOME/Dropbox/Workspace/journal/$(date +%Y)/$(date +%m); test -f /usr/bin/code && edit="code" || edit="vim"; $edit "$HOME/Dropbox/Workspace/journal/$(date +%Y)/$(date +%m)/journal-$(date +%Y-%m-%d).md"'
+# alias todo='mkdir -p $HOME/Dropbox/Workspace/todo/$(date +%Y); vim $HOME/Dropbox/Workspace/todo/$(date +%Y)/todo-$(date +%Y-%m).md'
 
 
 ####
