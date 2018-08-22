@@ -27,5 +27,5 @@ conky.config= {
 }
 
 conky.text=[[
-${execpi 120 ~/.dotfiles/conky/slide.sh ~/Pictures/lovewallpaper large}
+${execpi 60 ~/.dotfiles/conky/slide.sh ~/Pictures/lovewallpaper large}
 ]]

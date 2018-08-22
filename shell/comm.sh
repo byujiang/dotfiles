@@ -62,7 +62,7 @@ fi
 if [[ -x $HOME/usr/scripts/conky.sh && $(pgrep conky) = "" && $(command -v conky) != "" ]]; then
 	echo "Starting conky daemon"
 	sleep 5
-	$HOME/usr/scripts/conky.sh >/dev/null 2>&1
+	$HOME/usr/bin/conky.sh >/dev/null 2>&1
 fi
 
 

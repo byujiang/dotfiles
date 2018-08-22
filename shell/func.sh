@@ -226,3 +226,11 @@ function todo(){
 	command -v code >/dev/null && set edit="code" || set edit="vim"
 	$edit todo.${Year}.${Mon}.${daY}.md >/dev/null 2>&1
 }
+
+##################################################################
+type take > /dev/null
+if [[ $? != 0 ]]; then
+	function take(){
+		mkdir -p $@ && cd ${@:$#}
+	}
+fi
