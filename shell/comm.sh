@@ -28,13 +28,12 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
 #### gcc
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-alias gcc='gcc -fdiagnostics-color=always -std=c11'
-alias g++='g++ -fdiagnostics-color=always -std=c++11'
+alias gcc='gcc -fdiagnostics-color=always'
+alias g++='g++ -fdiagnostics-color=always'
 
 #### oh-my-zsh
 if [[ $(basename $SHELL) == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
-	# ZSH_THEME="bureau"
-	plugin=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction )
+	plugin=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
 fi
 
 #### PS1
@@ -59,9 +58,9 @@ fi
 
 ######## conky ##########
 
-if [[ -x $HOME/usr/scripts/conky.sh && $(pgrep conky) = "" && $(command -v conky) != "" ]]; then
+if [[ $(command -v conky) != "" && -x $HOME/usr/bin/conky.sh  && $(pgrep conky) = "" ]]; then
 	echo "Starting conky daemon"
-	sleep 5
+	sleep 1
 	$HOME/usr/bin/conky.sh >/dev/null 2>&1
 fi
 

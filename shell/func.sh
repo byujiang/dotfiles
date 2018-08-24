@@ -228,7 +228,7 @@ function todo(){
 }
 
 ##################################################################
-type take > /dev/null
+type take > /dev/null 2>&1
 if [[ $? != 0 ]]; then
 	function take(){
 		mkdir -p $@ && cd ${@:$#}
