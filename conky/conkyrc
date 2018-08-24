@@ -93,7 +93,7 @@ ${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+
 ####### Todo list #######
 ${voffset -10}${font DejaVu Mono:size=12}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -8}
 ${font Verdana:size=13}
-${execpi 60  ./todo.sh}
+${execpi 60 ./todo.sh}
 $font
 #############################################################################
 # ${voffset -40}

@@ -33,5 +33,4 @@ ln -sf ${dotfile_path}/mpv ~/.config/
 
 mkdir -p $HOME/usr/bin
 ln -sf ${dotfile_path}/conky/conky.sh ~/usr/bin/
-ln -sf $HOME/Dropbox/Workspace/todo/conky.txt ~/.todo.txt
-ln -sf $HOME/Dropbox/Workspace/todo/conky.txt ${dotfile_path}/conky/todo.txt
+[[ -f $HOME/Dropbox/Workspace/todo/conky.txt ]] && ln -sf $HOME/Dropbox/Workspace/todo/conky.txt ~/.todo.txt
