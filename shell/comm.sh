@@ -59,11 +59,8 @@ fi
 ######## conky ##########
 
 if [[ $(command -v conky) != "" && -x $HOME/usr/bin/conky.sh  && $(pgrep conky) = "" ]]; then
-	echo "Starting conky daemon"
-	sleep 1
 	$HOME/usr/bin/conky.sh >/dev/null 2>&1
 fi
-
 
 
 ######## Vultr API Key #######

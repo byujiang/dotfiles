@@ -108,8 +108,8 @@ alias ipy3='ipython3 --no-banner'
 
 command -v python3 >/dev/null && alias py='python3' || alias py='python2'
 command -v ipython3 >/dev/null && alias ipy='ipython3 --no-banner' || alias ipy='ipython2 --no-banner'
-alias pip2_update="sudo pc pip2 install -U \$(pip2 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
-alias pip3_update="sudo pc pip3 install -U \$(pip3 freeze|awk -F = '{print \$1}'|tr '\n' ' ') pip"
+alias pip2_update="sudo pc pip2 install \$(sudo pc pip2 list --no-cache-dir --outdated --format=columns|tail -n +3|cut -d ' ' -f1)"
+alias pip3_update="sudo pc pip3 install \$(sudo pc pip3 list --no-cache-dir --outdated --format=columns|tail -n +3|cut -d ' ' -f1)"
 ####
 
 
@@ -130,6 +130,9 @@ command -v squeue >/dev/null 2>&1 && alias qs='squeue -u $(whoami)' && alias sq=
 	# alias hg='hexo generate'
 	# alias hs='hexo server'
 # fi
+alias hc="hexo clean"
+alias hs="hexo server"
+alias hd="hexo clean && hexo deploy"
 
 ###dnf
 alias di='sudo dnf install -6y'

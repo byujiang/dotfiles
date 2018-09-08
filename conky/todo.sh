@@ -9,9 +9,9 @@ function display_todo(){
 	while read line
 	do
 		if [[ ${line:0:1} == "1" ]]; then
-			echo -e "\${color cyan}\t\${offset 10} ${line:1:${#line}}"
+			echo -e "\${offset 0}\${color cyan}  ${line:1:${#line}}"
 		else
-			echo -e "\${offset 170}\${color red}\t  ${line:1:${#line}}"
+			echo -e "\${offset 190}\${color green}| ${line:1:${#line}}"
 		fi
 	done < "$file"
 }
