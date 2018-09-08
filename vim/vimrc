@@ -156,7 +156,12 @@ set linebreak									" Set Linebreak "
 set wildmenu									" Turn on Wild Menu "
 set ruler										" Alwasy show current position "
 set scrolloff=5									" Set 7 Lines up or down vertically "
-set relativenumber										" Show the line number // nu"
+set number										" Show the line number // nu"
+augroup numbertoggle
+	autocmd!
+	autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+	autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
 set hidden										" Hide buffers when abandoned // hid "
 set magic										" Set Magic on for Regular Expression "
 set backspace=indent,eol,start					" Set Backspace "
