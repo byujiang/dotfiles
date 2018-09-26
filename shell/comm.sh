@@ -6,13 +6,15 @@ export EDITOR=vim
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
-export XMODIFIERS=@im=fcitx
+# export XMODIFIERS=@im=fcitx
 
 #### proxy
 # export all_proxy=socks5://127.0.0.1:1080
+if [[ $(pidof privoxy) != "" ]]; then
 ## privoxy
-# export http_proxy=http://127.0.0.1:8080
-# export https_proxy=http://127.0.0.1:8080
+	# export http_proxy=http://127.0.0.1:8080
+	export all_proxy=http://127.0.0.1:8080
+fi
 ## ss
 # export socks_proxy=socks5://127.0.0.1:1080
 

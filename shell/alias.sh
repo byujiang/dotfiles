@@ -96,8 +96,9 @@ alias ee='vim'
 alias sha256='openssl sha1 -sha256'
 
 #### git
+alias gits='git status'
 alias gitp='git push origin master'
-alias gita='git add -f --all * && git commit -am'
+alias gita='git add --all *; git commit -am'
 
 #### Python
 alias py2='python2'
