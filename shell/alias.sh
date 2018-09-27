@@ -153,3 +153,6 @@ alias pale="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
 
 ####
 alias make_grub2='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
+
+####
+alias scrot="scrot '%Y-%m-%d-%H-%M-%S_scrot.png' -e 'mv \$f ~/tmp/screenshots/' -d 5 -s"
