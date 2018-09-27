@@ -126,14 +126,15 @@ command -v squeue >/dev/null 2>&1 && alias qs='squeue -u $(whoami)' && alias sq=
 
 
 #### hexo
-# if [[ $(command -v hexo) != "" ]]; then
-	# alias hc='hexo clean'
-	# alias hg='hexo generate'
-	# alias hs='hexo server'
-# fi
-alias hc="hexo clean"
-alias hs="hexo server"
-alias hd="hexo clean && hexo deploy"
+if [[ $(command -v hexo) != "" ]]; then
+	alias hc='hexo clean'
+	alias hg='hexo generate'
+	alias hs='hexo server'
+	alias ch='cd ~/Workshop/amito'
+fi
+# alias hc="hexo clean"
+# alias hs="hexo server"
+# alias hd="hexo clean && hexo deploy"
 
 ###dnf
 alias di='sudo dnf install -6y'
