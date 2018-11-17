@@ -16,7 +16,7 @@ function virtualenv_info {
 }
 
 function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo 'λ' && return
+    git branch >/dev/null 2>/dev/null && echo '⠠⠵' && return
     echo '○'
 }
 
@@ -32,10 +32,20 @@ fi
 
 local current_dir='${PWD/#$HOME/~}'
 local git_info='$(git_prompt_info)'
+local returncode="-%{$fg[red]%}(%?)%{$FG[142]%}"
+function last_return_code(){
+	local LAST_EXIT_CODE=$?
+	if [[ $last_exit_code == "0" ]]; then
+		exit_prompt="-(%{$FG[040]%}$LAST_EXIT_CODE%{$FG[142]%})"
+	else
+		exit_prompt="-(%{$FG[150]%}$LAST_EXIT_CODE%{$FG[142]%})"
+	fi
+	echo "$exit_prompt"
+}
 
-
-PROMPT="╭─%{$FG[040]%}%n%{$reset_color%}%{$FG[142]%}@%{$reset_color%}%{$FG[033]%}$(box_name)%{$reset_color%}:%{$FG[239]%}%{$reset_color%}%{$terminfo[bold]$FG[226]%}${current_dir}%{$reset_color%}${git_info}%{$FG[142]%}${rvm_ruby} %D - %*
-╰─$(virtualenv_info) $(prompt_char) "
+# PROMPT="╭─%{$FG[040]%}%n%{$reset_color%}%{$FG[142]%}@%{$reset_color%}%{$FG[033]%}$(box_name)%{$reset_color%}:%{$FG[239]%}%{$reset_color%}%{$terminfo[bold]$FG[226]%}${current_dir}%{$reset_color%}${git_info}%{$FG[142]%}${rvm_ruby}-(%D %*)$(last_return_code)
+PROMPT="╭─%{$FG[040]%}%n%{$reset_color%}%{$FG[142]%}@%{$reset_color%}%{$FG[033]%}$(box_name)%{$reset_color%}: %{$FG[239]%}%{$reset_color%}%{$terminfo[bold]$FG[226]%}${current_dir} %{$reset_color%}${git_info}%{$FG[142]%}${rvm_ruby}(%D %*)${returncode}%{$reset_color%}
+╰─$(virtualenv_info)$FG[226]$(prompt_char) λ %{$reset_color%}"
 #╰─$(virtualenv_info)$(prompt_char) λ "
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$FG[239]%}on%{$reset_color%} %{$fg[255]%}"

@@ -111,8 +111,11 @@ command -v python3 >/dev/null && alias py='python3' || alias py='python2'
 command -v ipython3 >/dev/null && alias ipy='ipython3 --no-banner' || alias ipy='ipython2 --no-banner'
 alias pip2_update="sudo pc pip2 install \$(sudo pc pip2 list --no-cache-dir --outdated --format=columns|tail -n +3|cut -d ' ' -f1)"
 alias pip3_update="sudo pc pip3 install \$(sudo pc pip3 list --no-cache-dir --outdated --format=columns|tail -n +3|cut -d ' ' -f1)"
-####
 
+#### tmux
+alias ts='tmux'
+alias ta='tmux -r'
+alias tl='tmux ls'
 
 ####
 command -v evince >/dev/null 2>&1 && alias acroread='evince'
@@ -130,11 +133,9 @@ if [[ $(command -v hexo) != "" ]]; then
 	alias hc='hexo clean'
 	alias hg='hexo generate'
 	alias hs='hexo server'
+	alias hd="hexo clean && hexo deploy"
 	alias ch='cd ~/Workshop/amito'
 fi
-# alias hc="hexo clean"
-# alias hs="hexo server"
-# alias hd="hexo clean && hexo deploy"
 
 ###dnf
 alias di='sudo dnf install -6y'
@@ -157,3 +158,6 @@ alias make_grub2='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
 
 ####
 alias scrot="scrot '%Y-%m-%d-%H-%M-%S_scrot.png' -e 'mv \$f ~/tmp/screenshots/' -d 5 -s"
+
+#### ceph
+alias cs='ceph -s'

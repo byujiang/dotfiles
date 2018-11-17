@@ -1,0 +1,40 @@
+#!/usr/bin/conky -d -c
+-- vim: ts=4 sw=4 noet ai cindent syntax=lua
+-- [[ forked from default config ]]
+conky.config= {
+	use_xft = true,
+	background = true,
+	default_color = 'white',
+	default_outline_color = 'white',
+	default_shade_color = 'white',
+	update_interval = 60,
+	total_run_times = 0,
+	double_buffer = true,
+	text_buffer_size = 2048,
+	own_window = true,
+	own_window_type = 'normal',
+	own_window_transparent = true,
+	own_window_argb_visual = true,
+	own_window_argb_value = 120,
+	default_color='595959',
+	maximum_width=580,
+	alignment='br',
+	gap_x=600,
+	gap_y=100,
+	draw_shades=false,
+	no_buffers= false,
+	net_avg_samples=2,
+	override_utf8_locale=true,
+	imlib_cache_size=0,
+	short_units=true,
+	minimum_height = 350,
+	minimum_width = 580,
+	own_window_hints='undecorated,below,sticky,skip_taskbar,skip_pager'
+}
+
+conky.text=[[
+${voffset -0}${font DejaVu Mono:size=14}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -10}
+${font Noto Sans SC:size=11}
+# ${font Verdana:size=13}
+${execpi 30 ./todo.sh}
+]]
