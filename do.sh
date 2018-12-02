@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #### zsh
 dotfile_path=$(dirname `readlink -f $0`)
 

@@ -1,5 +1,5 @@
 ####################### common configuration #####################
-#### vim: ts=4 sw=4 ft=sh
+# vim: ts=2 sw=2 ft=sh
 
 #### system part
 export EDITOR=vim
@@ -10,7 +10,7 @@ export LC_CTYPE=en_US.UTF-8
 
 #### proxy
 # export all_proxy=socks5://127.0.0.1:1080
-if [[ $(pidof privoxy) != "" ]]; then
+if [[ $(pgrep privoxy) != "" ]]; then
 ## privoxy
 	# export http_proxy=http://127.0.0.1:8080
 	export all_proxy=http://127.0.0.1:8080
@@ -43,12 +43,6 @@ if [[ $(basename $SHELL) == "bash" ]]; then
 	PS1="\[\033[1;32m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;35m\]\u@\h';fi)\[\033[1;32m\])\342\224\200(\[\033[1;31m\]\$?\[\033[1;32m\])\342\224\200(\[\033[1;36m\]\@ \d\[\033[1;32m\])\n\342\224\224[\[\033[1;33m\]\w\[\033[1;32m\]]\342\224\200\[\033[1;31m\]|> \[\033[0m\]"
 fi
 
-#if [[ $(basename $SHELL) == "zsh" ]]; then
-# export PROMPT="%{%}%B┌─[%b%{%}%{%}%n%{%}@%{%}%{%}%m%{%}%B]%b%{%} - %b%{%}%B[%b%{%}%~%{%}%B]%b%{%} - %{%}%B[%b%{%}%D{%a %b %d, %H:%M}%b%{%}%B]%b%{%}
-# %{%}%B└─%B[%{%}$%{%}%B] - %B[\$?%B] - <$(git_prompt_info)>%{%}%b"
-# PS1='%{%}%B┌─[%b%{%}%{%}%n%{%}@%{%}%{%}%m%{%}%B]%b%{%} - %b%{%}%B[%b%{%}%~%{%}%B]%b%{%} - %{%}%B[%b%{%}%D{%a %b %d, %H:%M}%b%{%}%B]%b%{%}
-# %{%}%B└─%B[%{%}$%{%}%B] <$(git_prompt_info)>%{%}kb'
-#fi
 #### Bluetooth EarPod: MDR650BT
 alias pau='pacmd set-card-profile bluez_card.00_18_09_A4_00_D0 a2dp_sink'
 
@@ -59,11 +53,9 @@ if [[ -d $HOME/Workspace/xqcd/x/bin ]]; then
 fi
 
 ######## conky ##########
-
 if [[ $(command -v conky) != "" && -x $HOME/usr/bin/conky.sh  && $(pgrep conky) = "" ]]; then
 	$HOME/usr/bin/conky.sh >/dev/null 2>&1
 fi
-
 
 ######## Vultr API Key #######
 export vultr_api="JNMAJVOBF3NQL3J6U6GS42CJ7M32MD3JQYFA"
