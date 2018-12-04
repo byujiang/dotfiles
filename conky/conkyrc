@@ -43,61 +43,63 @@ conky.config = {
 
 conky.text = [[
 ####### System Info #########
-${image /home/amito/.dotfiles/conky/img/fedora.png -s 75x75}${voffset -5}
+${image /home/amito/.dotfiles/conky/img/fedora.png -s 75x75}${voffset -4}
 ${offset 95}${font DejaVu:size=32}${color black}${time %I}${voffset -5}:${voffset 5}${time %M}$font$color
 ${image /home/amito/.dotfiles/conky/img/b.png -p 82,4 -s 148x75}
-${voffset -72}${font DejaVu:size=10}${offset 238}${color black}${time %A}${font}
+${voffset -70}${font DejaVu:size=10}${offset 238}${color black}${time %A}${font}
 ${voffset -8}${font DejaVu:size=30}${color black}${offset 235}${time %d}$font
 ${voffset -48}${font DejaVu:size=34}${offset 300}${time %m}$font$color
 ${voffset 90}${image /home/amito/.dotfiles/conky/img/c.png -p 225,4 -s 75x75}${voffset -90}
 ${voffset 90}${image /home/amito/.dotfiles/conky/img/c.png -p 290,4 -s 75x75}${voffset -110}
 $alignc${font Verdana:size=14}${color white}${execpi 60 whoami}@${execpi 60 uname -n}    ${execpi 60 cat /etc/redhat-release|awk '{print $1 " " $3}'}   ${machine} $font
 ########  Machine Info #######
-${voffset 5}${color cyan}System: ${voffset -2}${stippled_hr 3,}$color
+${voffset 6}${color cyan}System: ${voffset 2}${stippled_hr 3,}$color
 ${color grey}Uptime:$color $uptime $alignr${color grey}Freq:$color ${freq} MiH
 ${color grey}Battery:${battery_short BAT0} ${alignr}${battery_bar 9,220 BAT0}
 ${color grey}Swap:$color $swap/$swapmax - $swapperc% ${swapbar 4}
 ${color grey}RAM:$color $mem/$memmax - $memperc% ${membar 4}
-#${voffset -2}${memgraph 000000 201b20}
-${color grey}CPU: $color $cpu% ${cpubar 4}
+${voffset -2}${memgraph 000000 201b20}
+${voffset 5}${color grey}CPU: $color $cpu% ${cpubar 4}
+# ${stippled_hr }
 Core 0: ${color red}${execpi 5 sensors|awk '/Core 0:/{print $3}'}$color
 ${voffset -20}${alignr}Core 1: ${color red}${execpi 5 sensors|awk '/Core 1:/{print $3}'}$color
 ${voffset -2}${cpugraph cpu0 30,80 000000 20abf0} ${cpugraph cpu1 30,80 000000 20abf0} ${cpugraph cpu2 30,80 000000 20abf0} ${cpugraph cpu3 30,80 000000 20abf0}
 ###### Disks ######
 ${voffset 2}${color cyan}Disks Usage: ${voffset -2}${stippled_hr 3,}$color
-#Sensor 1: ${color red}${execpi 10 sudo smartctl -a /dev/nvme0 | awk '/Temperature Sensor 1:/ {print $4}'} °C$color
-#${voffset -20}${alignr}Sensor 2: ${color red}${execpi 10 sudo smartctl -a /dev/nvme0 | awk '/Temperature Sensor 2:/ {print $4}'} °C$color
-/     ${alignr}$color${fs_used /}/${fs_size /} $alignr${fs_bar 6,130 /}
+${voffset 5}Sensor 1: ${color red}${execpi 10 sudo smartctl -a /dev/nvme0 | awk '/Temperature Sensor 1:/ {print $4}'} °C$color
+${voffset -20}${alignr}Sensor 2: ${color red}${execpi 10 sudo smartctl -a /dev/nvme0 | awk '/Temperature Sensor 2:/ {print $4}'} °C$color
+# ${stippled_hr }
+${voffset 8}/     ${alignr}$color${fs_used /}/${fs_size /} $alignr${fs_bar 6,130 /}
 /home ${alignr}$color${fs_used /home}/${fs_size /home} $alignr${fs_bar 6,130  /home}
 /data ${alignr}$color${fs_used /data}/${fs_size /data} $alignr${fs_bar 6,130 /data}
 /win  ${alignr}$color${fs_used /win}/${fs_size /win} $alignr${fs_bar 6,130 /win}
 ###### WiFi ######
 ${voffset 10}${color cyan}WiFi: ${voffset -2}${stippled_hr 3,}$color
 #${wireless_link_qual wlp58s0}% ${stippled_hr}$color
-Inner:${color green}${addr wlp58s0}$color${alignr}Outer:${color green}${execpi 60 curl -4 -s --stderr - --proxy socks5://127.0.0.1:1080 icanhazip.com}$color
-${voffset  5}U: ${voffset -08}${upspeedgraph wlp58s0 30,250 000000 ff0000} ${voffset -20}${alignr}${upspeed wlp58s0}/s
+${voffset 5}Inner:${color green}${addr wlp58s0}$color${alignr}Outer:${color green}${execpi 60 curl -4 -s --stderr - --proxy socks5://127.0.0.1:1080 icanhazip.com}$color
+${voffset  12}U: ${voffset -08}${upspeedgraph wlp58s0 30,250 000000 ff0000} ${voffset -20}${alignr}${upspeed wlp58s0}/s
 ${voffset 15}D: ${voffset -14}${downspeedgraph wlp58s0 30,250 000000 1fa0ab} ${voffset -20}${alignr}${downspeed wlp58s0}/s
 ####### Processes ######
-${voffset 15}${color cyan}Process: ${voffset -2}${stippled_hr 3,}$color
-${color cyan}NAME${alignr}PID   CPU%   MEM%$color
+${voffset 22}${color cyan}Process: ${voffset -2}${stippled_hr 3,}$color
+${voffset 5}${color cyan}NAME${alignr}PID   CPU%   MEM%$color
 ${color white}${top name 1} ${alignr}${top pid 1} ${top cpu 1} ${top mem 1}
 ${color white}${top name 2} ${alignr}${top pid 2} ${top cpu 2} ${top mem 2}
 ${color white}${top name 3} ${alignr}${top pid 3} ${top cpu 3} ${top mem 3}
 ${color white}${top name 4} ${alignr}${top pid 4} ${top cpu 4} ${top mem 4}
 ${color white}${top name 5} ${alignr}${top pid 5} ${top cpu 5} ${top mem 5}
-# ${color white}${top name 6} ${alignr}${top pid 6} ${top cpu 6} ${top mem 6}
+${color white}${top name 6} ${alignr}${top pid 6} ${top cpu 6} ${top mem 6}
 ###### Calander ######
-${voffset 10}${color cyan}Calendar: ${voffset -2}${stippled_hr 3,}$color${voffset 5}
+${voffset 12}${color cyan}Calendar: ${voffset -2}${stippled_hr 3,}$color${voffset 5}
 # ${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always > ~/a.txt}$font
 ${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g"}$font
 ####### Todo list #######
-${voffset -0}${font DejaVu Mono:size=12}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -10}
-${font Noto Sans SC:size=11}
-# ${font Verdana:size=13}
-${execpi 60 ./todo.sh}
-$font
-#############################################################################
-# ${voffset -40}
-# ${color cyan}${stippled_hr 3}$color
-# ${voffset -185}
+# ${voffset -0}${font DejaVu Mono:size=12}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -10}
+# ${font Noto Sans SC:size=11}
+# # ${font Verdana:size=13}
+# ${execpi 60 ./todo.sh}
+# $font
+ #############################################################################
+${voffset -40}
+${color cyan}${stippled_hr 3}$color
+${voffset -150}
 ]]

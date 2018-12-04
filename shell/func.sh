@@ -234,3 +234,11 @@ if [[ $? != 0 ]]; then
 		mkdir -p $@ && cd ${@:$#}
 	}
 fi
+
+type lst > /dev/null 2>&1
+
+if [[ $? != 0 ]];then
+	function lst(){
+		ls *.${1}
+	}
+fi
