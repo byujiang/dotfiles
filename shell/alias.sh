@@ -87,6 +87,7 @@ alias yt='pc -q youtube-dl'
 alias ppv='proxychains4 -q mpv'
 alias rsync='rsync -Pz --rsh=ssh -6'
 alias wget='wget --no-proxy -c --no-check-certificate'
+alias mtail='multitail'
 
 alias bc='bc -l'
 alias gp='gnuplot'
@@ -131,10 +132,11 @@ command -v squeue >/dev/null 2>&1 && alias qs='squeue -u $(whoami)' && alias sq=
 #### hexo
 if [[ $(command -v hexo) != "" ]]; then
 	alias hc='hexo clean'
-	alias hg='hexo generate'
+	alias hg='hexo clean && hexo generate'
 	alias hs='hexo server'
 	alias hd="hexo clean && hexo deploy"
 	alias ch='cd ~/Workshop/amito'
+	alias cdw='code C:\\Users\\Amito\\AppData\\Local\\Packages\\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\\LocalState\\rootfs\\home\\amito\\Workspace\\amito\\source\\_posts'
 fi
 
 ###dnf
