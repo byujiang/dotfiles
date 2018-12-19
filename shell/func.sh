@@ -242,3 +242,12 @@ if [[ $? != 0 ]];then
 		ls *.${1}
 	}
 fi
+
+##################################################################
+function eospath(){
+	if [[ ! -f $1 ]]; then
+		echo "$1 not exist!!!!"
+		exit 130
+	fi
+	eos file info $1 --fullpath
+}
