@@ -54,7 +54,7 @@ alias sl='ls'
 alias la='ls -A'
 alias ll='ls -lh'
 alias lla='ls -lhA'
-alias lsa='ls -lhA'
+alias lls='ls -lhAS'
 
 alias rd='rmdir'
 alias md='mkdir -pv'
