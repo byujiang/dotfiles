@@ -3,18 +3,18 @@
 -- [[ forked from default config ]]
 conky.config = {
 	alignment = 'top_right',
+	use_xft = true,
 	background = true,
-	border_width = 0,
+	draw_borders = true,
+	border_width = 1,
 	cpu_avg_samples = 2,
 	net_avg_samples = 2,
 	default_color = 'white',
 	default_outline_color = 'white',
 	default_shade_color = 'white',
-	draw_borders = false,
 	draw_graph_borders = true,
 	draw_outline = false,
 	draw_shades = false,
-	use_xft = true,
 	font = 'Source Code Pro:size=11',
 	gap_x = 4.85,
 	gap_y = 30,
@@ -99,7 +99,7 @@ ${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+
 # ${execpi 60 ./todo.sh}
 # $font
  #############################################################################
-${voffset -40}
+${voffset -20}
 ${color cyan}${stippled_hr 3}$color
-${voffset -150}
+${voffset -160}
 ]]
