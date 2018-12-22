@@ -35,3 +35,7 @@ ln -sf ${dotfile_path}/mpv ~/.config/
 mkdir -p $HOME/usr/bin
 ln -sf ${dotfile_path}/conky/conky.sh ~/usr/bin/
 [[ -f $HOME/Dropbox/Workspace/todo/conky.txt ]] && ln -sf $HOME/Dropbox/Workspace/todo/conky.txt ~/.todo.txt
+
+#### git
+[[ -f ~/.gitconfig ]] && mv ~/.gitconfig ~/.gitconfig.bak
+ln -sf ${dotfile_path}/git/.gitconfig ~/.gitconfig

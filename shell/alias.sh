@@ -136,7 +136,7 @@ if [[ $(command -v hexo) != "" ]]; then
 	alias hs='hexo server'
 	alias hd="hexo clean && hexo deploy"
 	alias ch='cd ~/Workshop/amito'
-	alias cdw='code C:\\Users\\Amito\\AppData\\Local\\Packages\\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\\LocalState\\rootfs\\home\\amito\\Workspace\\amito\\source\\_posts'
+	alias cdw='code D:\\CentOS\\rootfs\\home\\amito\\Workspace\\amito\\source &'
 fi
 
 ###dnf

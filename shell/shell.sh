@@ -6,7 +6,7 @@ export dotfile_path="$HOME/.dotfiles/shell"
 source ${dotfile_path}/comm.sh
 source ${dotfile_path}/func.sh
 source ${dotfile_path}/alias.sh
-source ${dotfile_path}/macos.sh
+# source ${dotfile_path}/macos.sh
 
 unset dotfile_path
 

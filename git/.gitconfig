@@ -1,0 +1,21 @@
+[user]
+	name = Yujiang BI
+	email = byujiang@gmail.com
+
+[alias]
+	a = add .
+	v = !gitk
+	br = branch
+	ci = commit -m
+	cm = commit -m
+	co = checkout
+	df = diff
+	dump = cat-file -p
+	hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	last = log -1 HEAD
+	pl = pull
+	ps = push
+	st = status
+	type = cat-file -t
+
+
