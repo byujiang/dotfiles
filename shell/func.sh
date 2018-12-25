@@ -250,4 +250,8 @@ function eospath(){
 		exit 130
 	fi
 	eos file info $1 --fullpath
+	if [[ $2 -eq 1 ]]; then
+		rm -f $1
+	fi
+
 }
