@@ -19,3 +19,5 @@
 	type = cat-file -t
 
 
+[push]
+	default = matching

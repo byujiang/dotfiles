@@ -107,7 +107,7 @@ Plugin 'calendar.vim',{'name':'calendar'}
 "Plugin 'closetag.vim', {'name': 'closetag'}
 " Plugin 'darkshell/netrw.vim',{'name':'netrw'}
 Plugin 'vim-scripts/c.vim',{'name':'cvim'}
-Plugin 'lilydjwg/fcitx.vim', {'name':'fcitx'}
+"Plugin 'lilydjwg/fcitx.vim', {'name':'fcitx'}
 Plugin 'davidhalter/jedi-vim',{'name':'jedi'}
 Plugin 'VundleVim/Vundle.vim', {'name':'vuldle'}
 Plugin 'bash-support.vim',{'name':'bash-support'}
