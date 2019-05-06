@@ -13,7 +13,8 @@ export LC_CTYPE=en_US.UTF-8
 if [[ $(pgrep privoxy) != "" ]]; then
 ## privoxy
 	# export http_proxy=http://127.0.0.1:8080
-	export all_proxy=http://127.0.0.1:8080
+	# export all_proxy=http://127.0.0.1:8080
+	export all_proxy=http://127.0.0.1:8118
 fi
 ## ss
 # export socks_proxy=socks5://127.0.0.1:1080

@@ -119,6 +119,8 @@ alias ta='tmux -r'
 alias tl='tmux ls'
 
 ####
+alias get_omz='wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -|sh'
+####
 command -v evince >/dev/null 2>&1 && alias acroread='evince'
 command -v okular >/dev/null 2>&1 && alias acroread='okular'
 

@@ -16,10 +16,10 @@ conky.config = {
 	draw_outline = false,
 	draw_shades = false,
 	font = 'Source Code Pro:size=11',
-	gap_x = 4.85,
-	gap_y = 30,
+	gap_x = 5,
+	gap_y = 40,
 	minimum_height = 5,
-	minimum_width = 5,
+	minimum_width = 300,
 	double_buffer = true,
 	out_to_console = false,
 	out_to_stderr = false,
@@ -43,14 +43,14 @@ conky.config = {
 
 conky.text = [[
 ####### System Info #########
-${image /home/amito/.dotfiles/conky/img/fedora.png -s 75x75}${voffset -4}
+${image $HOME/Workspace/dotfiles/conky/img/fedora.png -s 75x75}${voffset -4}
 ${offset 95}${font DejaVu:size=32}${color black}${time %I}${voffset -5}:${voffset 5}${time %M}$font$color
-${image /home/amito/.dotfiles/conky/img/b.png -p 82,4 -s 148x75}
+${image $HOME/Workspace/dotfiles/conky/img/b.png -p 82,4 -s 148x75}
 ${voffset -70}${font DejaVu:size=10}${offset 238}${color black}${time %A}${font}
 ${voffset -8}${font DejaVu:size=30}${color black}${offset 235}${time %d}$font
 ${voffset -48}${font DejaVu:size=34}${offset 300}${time %m}$font$color
-${voffset 90}${image /home/amito/.dotfiles/conky/img/c.png -p 225,4 -s 75x75}${voffset -90}
-${voffset 90}${image /home/amito/.dotfiles/conky/img/c.png -p 290,4 -s 75x75}${voffset -110}
+${voffset 90}${image $HOME/Workspace/dotfiles/conky/img/c.png -p 225,4 -s 75x75}${voffset -90}
+${voffset 90}${image $HOME/Workspace/dotfiles/conky/img/c.png -p 290,4 -s 75x75}${voffset -110}
 $alignc${font Verdana:size=14}${color white}${execpi 60 whoami}@${execpi 60 uname -n}    ${execpi 60 cat /etc/redhat-release|awk '{print $1 " " $3}'}   ${machine} $font
 ########  Machine Info #######
 ${voffset 6}${color cyan}System: ${voffset 2}${stippled_hr 3,}$color
@@ -76,7 +76,8 @@ ${voffset 8}/     ${alignr}$color${fs_used /}/${fs_size /} $alignr${fs_bar 6,130
 ###### WiFi ######
 ${voffset 10}${color cyan}WiFi: ${voffset -2}${stippled_hr 3,}$color
 #${wireless_link_qual wlp58s0}% ${stippled_hr}$color
-${voffset 5}Inner:${color green}${addr wlp58s0}$color${alignr}Outer:${color green}${execpi 60 curl -4 -s --stderr - --proxy socks5://127.0.0.1:1080 icanhazip.com}$color
+${voffset 5}Inner:${color green}${addr wlp58s0}$color${alignr}
+Outer:${font Noto Sans Mono:size=10}${color green}${execpi 60 curl -4 -s --stderr - --proxy socks5://127.0.0.1:1080 icanhazip.com}$color$font
 ${voffset  12}U: ${voffset -08}${upspeedgraph wlp58s0 30,250 000000 ff0000} ${voffset -20}${alignr}${upspeed wlp58s0}/s
 ${voffset 15}D: ${voffset -14}${downspeedgraph wlp58s0 30,250 000000 1fa0ab} ${voffset -20}${alignr}${downspeed wlp58s0}/s
 ####### Processes ######
@@ -91,7 +92,7 @@ ${color white}${top name 6} ${alignr}${top pid 6} ${top cpu 6} ${top mem 6}
 ###### Calander ######
 ${voffset 12}${color cyan}Calendar: ${voffset -2}${stippled_hr 3,}$color${voffset 5}
 # ${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always > ~/a.txt}$font
-${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g"}$font
+${font Noto Sans Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g"}$font
 ####### Todo list #######
 # ${voffset -0}${font DejaVu Mono:size=12}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -10}
 # ${font Noto Sans SC:size=11}
