@@ -68,6 +68,7 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 alias e.='nautilus . >/dev/null 2>&1 &'
+alias tailf='tail -f'
 
 #### network
 alias v6='ping -c 4 -6 amito.me'
@@ -120,6 +121,7 @@ alias tl='tmux ls'
 
 ####
 alias get_omz='wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -|sh'
+
 ####
 command -v evince >/dev/null 2>&1 && alias acroread='evince'
 command -v okular >/dev/null 2>&1 && alias acroread='okular'
@@ -165,3 +167,7 @@ alias scrot="scrot '%Y-%m-%d-%H-%M-%S_scrot.png' -e 'mv \$f ~/tmp/screenshots/' 
 
 #### ceph
 alias cs='ceph -s'
+
+
+
+
