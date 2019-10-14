@@ -384,7 +384,7 @@ au FileType txt set linebreak textwidth=88
 function! PythonMode()
 	set tabstop=4
 	set shiftwidth=4
-	set noexpandtab
+	set expandtab
 endfunction
 "command! -nargs=0 MailMode setlocal ft=mail
 
@@ -402,8 +402,10 @@ endfunction
 "------------------------------------------------------------------------------"
 ""								 Python										  ""
 "------------------------------------------------------------------------------"
-autocmd FileType python set tabstop=4 shiftwidth=4 noexpandtab
+autocmd FileType python set tabstop=4 shiftwidth=4 expandtab
 autocmd FileType python map <Leader>ll :!python %<CR>
+autocmd FileType python setlocal omnifunc=python3complete#Complete
+
 let g:pydiction_menu_height=3
 let g:pydiction_location='~/.vim/pydiction/complete-dict'
 

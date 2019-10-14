@@ -14,7 +14,7 @@ if [[ $(pgrep privoxy) != "" ]]; then
 ## privoxy
 	# export http_proxy=http://127.0.0.1:8080
 	# export all_proxy=http://127.0.0.1:8080
-	export all_proxy=http://127.0.0.1:8118
+	export all_proxy=http://127.0.0.1:8080
 fi
 ## ss
 # export socks_proxy=socks5://127.0.0.1:1080
@@ -23,9 +23,9 @@ if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
 	export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
 fi
 
-export PATH=$HOME/usr/bin:$HOME/usr/scripts:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/.local/bin:$HOME/usr/bin:/usr/local/bin:/usr/local/sbin:$PATH
 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib:/usr/local/lib:/usr/local/lib64
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib:/usr/local/lib:/usr/local/lib64:$HOME/.local/lib
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
@@ -47,17 +47,7 @@ fi
 #### Bluetooth EarPod: MDR650BT
 alias pau='pacmd set-card-profile bluez_card.00_18_09_A4_00_D0 a2dp_sink'
 
-#### xqcd
-if [[ -d $HOME/Workspace/xqcd/x/bin ]]; then
-	export xpath="$HOME/Workspace/xqcd/x/"
-	export PATH=$PATH:$HOME/Workspace/xqcd/x/bin
-fi
-
 ######## conky ##########
 if [[ $(command -v conky) != "" && -x $HOME/usr/bin/conky.sh  && $(pgrep conky) = "" ]]; then
-	$HOME/usr/bin/conky.sh >/dev/null 2>&1
+	$HOME/usr/bin/conky.sh >/dev/null 2>&1 &
 fi
-
-######## Vultr API Key #######
-export vultr_api="JNMAJVOBF3NQL3J6U6GS42CJ7M32MD3JQYFA"
-export vultr_header="API-Key: $vultr_api"

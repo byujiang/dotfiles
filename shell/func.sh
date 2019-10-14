@@ -85,30 +85,22 @@ function gcm(){
 	fi
 }
 function sss(){
-	json_path=~/tmp/ss
-	mm="gcm"
+	json_path=~/tmp/v2ray
+	mm="v2ray"
 	# mm="libev"
 	if [[ $# != 1 && $# != 2 ]]; then
-		echo "Usage:\n sss 0/4/6 [gcm/libev]"
+		echo "Usage:\n sss 0/1/2/4/6"
 		return 130
 	fi
 	if [[ $1 == "0" ]]; then
 		sudo systemctl stop $mm
 		return
 	fi
-	if [[ $# == 2 ]]; then
-		mm=$2
-	fi
-	if [[ $mm != "gcm" && $mm != "libev" ]];then
-		echo "\$2 can be 'gcm' or 'libev' only."
-		return 200
-	fi
-	echo "json path: ${json_path}"
 	case "$1" in
 		[46])
-			echo "Linking ${mm}${1}.json to ${mm}.json"
-			ln -sf ${json_path}/${mm}${1}.json ${json_path}/${mm}.json
-			echo "Restart gcm service"
+			echo "Linking config${1}.json to config.json"
+			ln -sf ${json_path}/config${1}.json ${json_path}/config.json
+			echo "Restart $mm service"
 			sudo systemctl restart $mm
 			;;
 		0)
@@ -117,15 +109,15 @@ function sss(){
 			;;
 		1)
 			echo "Start showing log"
-			tail -f /var/log/${mm}.log
+			journalctl -fu $mm
 			;;
 		2)
-			ls -lh ${json_path}/${mm}.json
+			ls -lh ${json_path}/config.json
 			echo "q" | sudo systemctl status $mm
 			echo ''
 			;;
 		*)
-			echo "Option not acceptable. Only 0/1/4/6 are acceptable"
+			echo "Option not acceptable. Only 0/1/2/4/6 are acceptable"
 			return 130
 			;;
 	esac
