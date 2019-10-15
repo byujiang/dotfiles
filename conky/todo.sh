@@ -9,14 +9,14 @@ function display_todo(){
 	while read line
 	do
 		if [[ ${line:0:1} == "1" ]]; then
-			echo -e "\${offset 0}\${color green} - ${line:1:${#line}}"
+			echo -e "\${offset 20}\${color green} - ${line:1:${#line}}"
 		else
-			echo -e "\${offset 0}\${color cyan} - ${line:1:${#line}}"
+			echo -e "\${offset 20}\${color cyan} - ${line:1:${#line}}"
 		fi
 	done < "$file"
 }
 
-f=/home/amito/.todo.txt
+f=${HOME}/.todo.txt
 display_todo $f
 # LTIME=`stat -c %Z $file`
 # while true

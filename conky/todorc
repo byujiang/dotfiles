@@ -21,8 +21,8 @@ conky.config= {
 	default_color='595959',
 	maximum_width=580,
 	alignment='br',
-	gap_x=750,
-	gap_y=200,
+	gap_x=800,
+	gap_y=600,
 	draw_shades=false,
 	no_buffers= false,
 	net_avg_samples=2,
@@ -30,12 +30,12 @@ conky.config= {
 	imlib_cache_size=0,
 	short_units=true,
 	minimum_height = 350,
-	minimum_width = 450,
+	minimum_width = 500,
 	own_window_hints='undecorated,below,sticky,skip_taskbar,skip_pager'
 }
 
 conky.text=[[
-${voffset -0}${font DejaVu Mono:size=16}${color red}Todo:${voffset -2}$font${voffset -10}
+${offset 10}${voffset 5}${font DejaVu Mono:size=18}${color red}Todo:${voffset -2}$font${voffset -10}
 ${font Noto Sans CJK SC:size=14}
 # ${font Verdana:size=13}
 ${execpi 30 ~/Workspace/dotfiles/conky/todo.sh}

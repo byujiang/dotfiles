@@ -43,7 +43,7 @@ conky.config = {
 
 conky.text = [[
 ####### System Info #########
-${image $HOME/Workspace/dotfiles/conky/img/fedora.png -s 60x60}${voffset -8}
+${image $HOME/Workspace/dotfiles/conky/img/centos.png -s 60x60}${voffset -8}
 ${offset 74}${font DejaVu:size=30}${color black}${time %I}${voffset -5}:${voffset 5}${time %M}$font$color
 ${image $HOME/Workspace/dotfiles/conky/img/b.png -p 60,2 -s 140x72}
 ${voffset -60}${font DejaVu:size=30}${color black}${offset 215}${time %d}$font
@@ -51,11 +51,11 @@ ${voffset -50}${font DejaVu:size=8}${offset 275}${color black}${time %A}${font}
 ${voffset -10}${font DejaVu:size=29}${offset 275}${time %m}$font$color
 ${voffset 90}${image $HOME/Workspace/dotfiles/conky/img/c.png -p 205,2 -s 72x72}${voffset -90}
 ${voffset 90}${image $HOME/Workspace/dotfiles/conky/img/c.png -p 265,2 -s 72x72}${voffset -110}
-$alignc${font Verdana:size=14}${color white}${execpi 60 whoami}@${execpi 60 uname -n}    ${execpi 60 cat /etc/redhat-release|awk '{print $1 " " $3}'}   ${machine} $font
+$alignc${font Verdana:size=14}${color white}${execpi 60 whoami}@${execpi 60 uname -n}    ${execpi 60 cat /etc/redhat-release|awk '{print $1 " " $4}'}   ${machine} $font
 ########  Machine Info #######
 ${voffset 6}${color cyan}System: ${voffset 2}${stippled_hr 3,}$color
 ${color grey}Uptime:$color $uptime $alignr${color grey}Freq:$color ${freq} MiH
-${color grey}Battery:${battery_short BAT0} ${alignr}${battery_bar 9,220 BAT0}
+${color grey}Battery: ${battery BAT0} ${alignr}${battery_bar 9,220 BAT0}
 ${color grey}Swap:$color $swap/$swapmax - $swapperc% ${swapbar 10}
 ${color grey}RAM:$color $mem/$memmax - $memperc% ${membar 10}
 ${voffset -2}${memgraph 000000 201b20}
@@ -76,13 +76,13 @@ ${voffset 8}/     ${alignr}$color${fs_used /}/${fs_size /} $alignr${fs_bar 6,120
 ###### WiFi ######
 ${voffset 10}${color cyan}WiFi: ${voffset -2}${stippled_hr 3,}$color
 #${wireless_link_qual wlp58s0}% ${stippled_hr}$color
-${voffset 5}Inner: ${color green}${addr wlp59s0}$color${alignr}
-Outer: ${font Noto Sans Mono:size=10}${color green}${execpi 60 curl -4 -s --stderr - --proxy socks5://127.0.0.1:1080 icanhazip.com}$color$font
-${voffset  12}U: ${voffset -08}${upspeedgraph wlp59s0 30,220 000000 ff0000} ${voffset -20}${alignr}${upspeed wlp59s0}/s
-${voffset 15}D: ${voffset -14}${downspeedgraph wlp59s0 30,220 000000 1fa0ab} ${voffset -20}${alignr}${downspeed wlp59s0}/s
+${voffset 5}Inner: ${alignr}${color green}${addr wlp59s0}$color
+Outer: ${font Noto Sans Mono:size=10}${alignr}${color green}${execpi 60 curl -4 -s --stderr - --proxy socks5://127.0.0.1:1080 icanhazip.com}$color$font
+${voffset 12}U: ${voffset -08}${upspeedgraph wlp59s0 30,270 000000 ff0000} ${voffset -20}${alignr}${upspeed wlp59s0}/s
+${voffset 15}D: ${voffset -14}${downspeedgraph wlp59s0 30,270 000000 1fa0ab} ${voffset -20}${alignr}${downspeed wlp59s0}/s
 ####### Processes ######
 ${voffset 22}${color cyan}Process: ${voffset -2}${stippled_hr 3,}$color
-${voffset 5}${color cyan}NAME${alignr}PID   CPU%   MEM%$color
+${voffset 5}${color cyan}NAME${alignr} PID    CPU%    MEM%$color
 ${color white}${top name 1} ${alignr}${top pid 1} ${top cpu 1} ${top mem 1}
 ${color white}${top name 2} ${alignr}${top pid 2} ${top cpu 2} ${top mem 2}
 ${color white}${top name 3} ${alignr}${top pid 3} ${top cpu 3} ${top mem 3}
@@ -91,9 +91,9 @@ ${color white}${top name 5} ${alignr}${top pid 5} ${top cpu 5} ${top mem 5}
 ${color white}${top name 6} ${alignr}${top pid 6} ${top cpu 6} ${top mem 6}
 ###### Calander ######
 ${voffset 12}${color cyan}Calendar: ${voffset -2}${stippled_hr 3,}$color${voffset 5}
-# ${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always > ~/a.txt}$font
-# ${font Noto Sans Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[7m\([0-9]\+\)/\${color red}\1/g" -e "s/\[27m/\$color/g"}$font
-${font Noto Sans Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g" }$font
+# ${font Noto Mono:size=12}${execpi 60 cal -n2 --color=always > ~/a.txt}$font
+# ${font Noto Sans Mono:size=12}${execpi 60 cal -n2 --color=always|sed -e "s/\[7m\([0-9]\+\)/\${color red}\1/g" -e "s/\[27m/\$color/g"}$font
+${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g" }$font
 ####### Todo list #######
 # ${voffset -0}${font DejaVu Mono:size=12}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -10}
 # ${font Noto Sans SC:size=11}
