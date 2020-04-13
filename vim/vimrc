@@ -610,6 +610,10 @@ noremap <Leader>it <ESC>:IHT<CR>
 " and so on
 " vim sudo:file
 
+""""""""""""""""""""""""""""" yaml """"""""""""""""""""""""
+autocmd FileType yaml set noexpandtab
+autocmd FileType yml set noexpandtab
+
 " --------------------- Done Above ----------------------- "
 
 " ============>> Syntax <<============ "
@@ -771,6 +775,8 @@ let g:pydiction_location='~/.vim/pydiction/complete-dict'
 """"""""""""""""""""""""""""""""""""""""
 " ==========>> pyflakes-vim <<======= "
 """"""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""
 """"""""""""""" Doxygen """"""""""""""

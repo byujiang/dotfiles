@@ -17,7 +17,7 @@
 	ps = push
 	st = status
 	type = cat-file -t
-
+	sum = shortlog -sn
 
 [push]
 	default = matching
