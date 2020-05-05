@@ -51,3 +51,13 @@ alias pau='pacmd set-card-profile bluez_card.00_18_09_A4_00_D0 a2dp_sink'
 if [[ $(command -v conky) != "" && -x $HOME/usr/bin/conky.sh  && $(pgrep conky) = "" ]]; then
 	$HOME/usr/bin/conky.sh >/dev/null 2>&1 &
 fi
+
+function ngrep(){
+	grep "$1" *.yaml
+	grep "$1" *.yaml|wc
+}
+
+function nsed(){
+	grep "$1" *.yaml >> 99.txt
+	sed -i "/$1/d" *.yaml
+}
