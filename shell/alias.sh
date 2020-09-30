@@ -149,8 +149,10 @@ fi
 alias di='sudo dnf install -6y'
 alias di6='sudo dnf install -6y'
 alias di4='sudo dnf install -4y'
+
 #### applications
 # alias netmusic="all_proxy=socks://127.0.0.1:1080 /usr/bin/netease-cloud-music %U >/dev/null 2>&1 &"
+
 alias caps="gsettings set org.gnome.desktop.input-sources xkb-options \"['caps:ctrl_modifier']\""
 alias dark="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'"
 alias pale="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
@@ -159,7 +161,7 @@ alias pale="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
 alias make_grub2='f=$(sudo find /boot/efi -name grub.cfg); sudo grub2-mkconfig -o $f'
 
 #### screenshot
-alias scrot="scrot '%Y-%m-%d-%H-%M-%S_scrot.png' -e 'mv \$f ~/Pictures/Screenshots/' -d 5 -s"
+alias scrot="scrot \"$HOME/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_scrot.png\" -d 3 -s"
 
 #### ceph
 alias cs='ceph -s'
