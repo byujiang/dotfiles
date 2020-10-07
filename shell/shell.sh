@@ -8,4 +8,3 @@ source ${dotfile_path}/alias.sh
 # source ${dotfile_path}/macos.sh
 
 unset dotfile_path
-

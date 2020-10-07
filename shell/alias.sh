@@ -149,27 +149,20 @@ fi
 alias di='sudo dnf install -6y'
 alias di6='sudo dnf install -6y'
 alias di4='sudo dnf install -4y'
+
 #### applications
 # alias netmusic="all_proxy=socks://127.0.0.1:1080 /usr/bin/netease-cloud-music %U >/dev/null 2>&1 &"
+
 alias caps="gsettings set org.gnome.desktop.input-sources xkb-options \"['caps:ctrl_modifier']\""
 alias dark="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'"
 alias pale="gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita'"
 
-#### simple functions
-# keep journal
-# alias jj='mkdir -p $HOME/Dropbox/Workspace/journal/$(date +%Y)/$(date +%m); test -f /usr/bin/code && edit="code" || edit="vim"; $edit "$HOME/Dropbox/Workspace/journal/$(date +%Y)/$(date +%m)/journal-$(date +%Y-%m-%d).md"'
-# alias todo='mkdir -p $HOME/Dropbox/Workspace/todo/$(date +%Y); vim $HOME/Dropbox/Workspace/todo/$(date +%Y)/todo-$(date +%Y-%m).md'
+#### generate grub.cfg
+alias make_grub2='f=$(sudo find /boot/efi -name grub.cfg); sudo grub2-mkconfig -o $f'
 
-
-####
-alias make_grub2='sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg'
-
-####
-alias scrot="scrot '%Y-%m-%d-%H-%M-%S_scrot.png' -e 'mv \$f ~/tmp/screenshots/' -d 5 -s"
+#### screenshot
+alias scrot="scrot \"$HOME/Pictures/Screenshots/%Y-%m-%d-%H-%M-%S_scrot.png\" -d 3 -s"
 
 #### ceph
 alias cs='ceph -s'
-
-
-
 

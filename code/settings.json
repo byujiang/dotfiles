@@ -1,0 +1,10 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "window.zoomLevel": 0,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.fontSize": 18,
+    "workbench.colorTheme": "Monokai",
+    "python.linting.mypyEnabled": true
+}
