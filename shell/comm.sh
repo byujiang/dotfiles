@@ -16,6 +16,13 @@ if [[ $(pgrep privoxy) != "" ]]; then
 	# export all_proxy=http://127.0.0.1:8080
 	export all_proxy=http://127.0.0.1:8080
 fi
+## clash
+if [[ $(pgrep clash) != "" ]]; then
+## privoxy
+	# export http_proxy=http://127.0.0.1:8080
+	# export all_proxy=http://127.0.0.1:8080
+	export all_proxy=socks5://localhost:7891
+fi
 ## ss
 # export socks_proxy=socks5://127.0.0.1:1080
 
@@ -57,7 +64,7 @@ function ngrep(){
 	grep "$1" *.yaml|wc
 }
 
-function nsed(){
-	grep "$1" *.yaml >> 99.txt
-	sed -i "/$1/d" *.yaml
-}
+#function nsed(){
+#	grep "$1" *.yaml >> 99.txt
+#	sed -i "/$1/d" *.yaml
+#}

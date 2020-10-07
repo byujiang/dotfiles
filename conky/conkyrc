@@ -93,7 +93,7 @@ ${color white}${top name 6} ${alignr}${top pid 6} ${top cpu 6} ${top mem 6}
 ${voffset 12}${color cyan}Calendar: ${voffset -2}${stippled_hr 3,}$color${voffset 5}
 # ${font Noto Mono:size=12}${execpi 60 cal -n2 --color=always > ~/a.txt}$font
 # ${font Noto Sans Mono:size=12}${execpi 60 cal -n2 --color=always|sed -e "s/\[7m\([0-9]\+\)/\${color red}\1/g" -e "s/\[27m/\$color/g"}$font
-${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g" }$font
+#${font Noto Mono:size=11}${execpi 60 cal -n2 --color=always|sed -e "s/\[[0-9]\+m\([0-9]\+\)/\${color red}\1/g" -e "s/\[[0-9]\+m/\$color/g" }$font
 ####### Todo list #######
 # ${voffset -0}${font DejaVu Mono:size=12}${color cyan}Todo:  ${voffset -2}${stippled_hr 3,}$color$font${voffset -10}
 # ${font Noto Sans SC:size=11}

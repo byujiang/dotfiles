@@ -247,3 +247,8 @@ function eospath(){
 	fi
 
 }
+
+function ngrep(){ grep -R "$1" wubi06.ms.dict.yaml | tee -a a.log; grep -R $1 *.yaml|wc; }
+
+function nsed(){ sed -i -e "/\B$1/d" -e "/$1\B/d" *.yaml; }
+
