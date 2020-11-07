@@ -253,4 +253,3 @@ function nsed(){
 	grep "$1" *.yaml >> 99.txt
 	sed -i "/$1/d" *.yaml
 }
-

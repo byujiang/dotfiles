@@ -13,6 +13,11 @@ if [[ $(pgrep clash) != "" ]]; then
 	export all_proxy=http://localhost:7890/
 	export http_proxy=http://localhost:7890/
 fi
+## clash
+if [[ $(pgrep clash) != "" ]]; then
+	export all_proxy=socks5://localhost:7890
+	export http_proxy=socks5://localhost:7890
+fi
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
 	export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
@@ -42,4 +47,3 @@ fi
 if [[ $(basename $SHELL) == "bash" ]]; then
 	export PS1="\[\033[1;32m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;35m\]\u@\h';fi)\[\033[1;32m\])\342\224\200(\[\033[1;31m\]\$?\[\033[1;32m\])\342\224\200(\[\033[1;36m\]\@ \d\[\033[1;32m\])\n\342\224\224[\[\033[1;33m\]\w\[\033[1;32m\]]\342\224\200\[\033[1;31m\]|> \[\033[0m\]"
 fi
-
