@@ -23,6 +23,13 @@ if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
 	export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
 fi
 
+#### git218 or git212 for centos 7
+if [[ -f /opt/rh/rh-git218/enable ]]; then
+	source /opt/rh/rh-git218/enable
+elif [[ -f /opt/rh/rh-git212/enable ]]; then
+	source /opt/rh/rh-git212/enable
+fi
+
 #### HOME path and include and libs
 export PATH=$HOME/.local/bin:$HOME/usr/bin:/usr/local/bin:/usr/local/sbin:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib:/usr/local/lib:/usr/local/lib64:$HOME/.local/lib
