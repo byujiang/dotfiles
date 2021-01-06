@@ -10,11 +10,6 @@ export LC_CTYPE=en_US.UTF-8
 
 #### clash
 if [[ $(pgrep clash) != "" ]]; then
-	export all_proxy=http://localhost:7890/
-	export http_proxy=http://localhost:7890/
-fi
-## clash
-if [[ $(pgrep clash) != "" ]]; then
 	export all_proxy=http://localhost:7890
 	export http_proxy=http://localhost:7890
 fi
@@ -36,11 +31,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib:/usr/local/lib:/usr/local/
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
-#### oh-my-zsh
-if [[ $SHELL == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
-	plugins=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
-fi
-
 #### nvidia cuda
 CUDA_HOME=/usr/local/cuda/
 if [[ -f $CUDA_HOME/bin/nvcc ]]; then
@@ -48,6 +38,15 @@ if [[ -f $CUDA_HOME/bin/nvcc ]]; then
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CUDA_HOME/lib64/:$CUDA_HOME/lib64/stubs:$CUDA_HOME/nvvm/lib64
 	export C_INCLUDE_PATH=$C_INCLUDE_PATH:$CUDA_HOME/include:$CUDA_HOME/nvvm/include
 	export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$CUDA_HOME/include:$CUDA_HOME/nvvm/include
+fi
+
+#### SHELL
+if [[ $SHELL == "" ]]; then
+	export SHELL="$0"
+fi
+#### oh-my-zsh
+if [[ $SHELL == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
+	plugins=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
 fi
 
 ### PS1
