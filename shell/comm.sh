@@ -10,13 +10,8 @@ export LC_CTYPE=en_US.UTF-8
 
 #### clash
 if [[ $(pgrep clash) != "" ]]; then
-	export all_proxy=http://localhost:7890/
-	export http_proxy=http://localhost:7890/
-fi
-## clash
-if [[ $(pgrep clash) != "" ]]; then
-	export all_proxy=socks5://localhost:7890
-	export http_proxy=socks5://localhost:7890
+	export all_proxy=http://localhost:7890
+	export http_proxy=http://localhost:7890
 fi
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
@@ -36,11 +31,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib:/usr/local/lib:/usr/local/
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
-#### oh-my-zsh
-if [[ $(basename $SHELL) == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
-	plugin=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
-fi
-
 #### nvidia cuda
 CUDA_HOME=/usr/local/cuda/
 if [[ -f $CUDA_HOME/bin/nvcc ]]; then
@@ -50,7 +40,19 @@ if [[ -f $CUDA_HOME/bin/nvcc ]]; then
 	export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$CUDA_HOME/include:$CUDA_HOME/nvvm/include
 fi
 
-#### PS1
+#### SHELL
+if [[ $SHELL == "" ]]; then
+	export SHELL="$0"
+fi
+#### oh-my-zsh
+if [[ $SHELL == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
+	plugins=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
+fi
+
+### PS1
 if [[ $(basename $SHELL) == "bash" ]]; then
 	export PS1="\[\033[1;32m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;35m\]\u@\h';fi)\[\033[1;32m\])\342\224\200(\[\033[1;31m\]\$?\[\033[1;32m\])\342\224\200(\[\033[1;36m\]\@ \d\[\033[1;32m\])\n\342\224\224[\[\033[1;33m\]\w\[\033[1;32m\]]\342\224\200\[\033[1;31m\]|> \[\033[0m\]"
 fi
+
+#### TERM
+export TERM='xterm'
