@@ -13,6 +13,12 @@ if [[ $(pgrep clash) != "" ]]; then
 	export all_proxy=http://localhost:7890
 	export http_proxy=http://localhost:7890
 fi
+if [[ $(uname -a) =~ "WSL2" ]]; then
+	export all_proxy=http://172.20.80.1:7890/
+	export http_proxy=http://172.20.80.1t:7890/
+	alias yt3='youtube-dl --proxy http://172.20.80.1:7890/ -f bestvideo+bestaudio --merge-output-format mp4 --no-playlist'
+fi
+
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
 	export PATH=$PATH:$HOME/Workspace/rismom/analysis/python
