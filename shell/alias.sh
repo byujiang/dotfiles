@@ -85,8 +85,9 @@ alias psg='ps|grep -v grep|grep -i -e " PID " -e VSZ -e'
 ####
 alias tran='trans :zh'
 [[ ! -x /usr/bin/pc ]] && alias pc='proxychains4 -q'
-alias yt='youtube-dl --proxy socks5://localhost:1080/ -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --merge-output-format mp4 --no-playlist'
-alias yt2='youtube-dl --proxy socks5://localhost:1080/ -f bestvideo+bestaudio --merge-output-format mp4 --no-playlist'
+alias yt0='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --merge-output-format mp4 --no-playlist'
+alias yt='youtube-dl --proxy socks5://localhost:7890/ -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --merge-output-format mp4 --no-playlist'
+alias yt2='youtube-dl --proxy socks5://localhost:7890/ -f bestvideo+bestaudio --merge-output-format mp4 --no-playlist'
 
 alias ppv='proxychains4 -q mpv'
 alias rsync='rsync -Pz --rsh=ssh -6'

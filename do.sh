@@ -10,7 +10,9 @@ if [[ -f $HOME/.zshrc ]]; then
 	grep -q "source ${dotfile_path}/shell/shell.sh" ~/.zshrc || echo "source ${dotfile_path}/shell/shell.sh" >> ~/.zshrc
 	#echo 'ZSH_THEME="agnoster"' >> ~/.zshrc
 	sed -i "s|robbyrussell|fino-time|g"  ~/.zshrc
-	cp ${dotfile_path}/shell/fino-time.zsh-theme ~/.oh-my-zsh/themes
+	if [[ -d $HOME/.oh-my-zsh ]]; then
+		cp ${dotfile_path}/shell/fino-time.zsh-theme ~/.oh-my-zsh/themes
+	fi
 fi
 grep -q "source ${dotfile_path}/shell/shell.sh" ~/.bashrc|| echo "source ${dotfile_path}/shell/shell.sh" >> ~/.bashrc
 

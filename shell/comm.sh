@@ -16,6 +16,9 @@ fi
 if [[ $(uname -a) =~ "WSL2" ]]; then
 	export all_proxy=http://172.20.80.1:7890/
 	export http_proxy=http://172.20.80.1t:7890/
+	alias yt0='youtube-dl -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --merge-output-format mp4 --no-playlist'
+	alias yt='youtube-dl --proxy socks5://localhost:7890/ -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio" --merge-output-format mp4 --no-playlist'
+	alias yt2='youtube-dl --proxy socks5://localhost:7890/ -f bestvideo+bestaudio --merge-output-format mp4 --no-playlist'
 	alias yt3='youtube-dl --proxy http://172.20.80.1:7890/ -f bestvideo+bestaudio --merge-output-format mp4 --no-playlist'
 fi
 
