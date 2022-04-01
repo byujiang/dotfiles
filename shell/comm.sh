@@ -10,13 +10,8 @@ export LC_CTYPE=en_US.UTF-8
 
 #### clash
 if [[ $(pgrep clash) != "" ]]; then
-	export all_proxy=http://localhost:7890/
+	export all_proxy=socks://localhost:7891/
 	export http_proxy=http://localhost:7890/
-fi
-## clash
-if [[ $(pgrep clash) != "" ]]; then
-	export all_proxy=http://localhost:7890
-	export http_proxy=http://localhost:7890
 fi
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
@@ -37,6 +32,9 @@ export C_INCLUDE_PATH=$C_INCLUDE_PATH:$HOME/usr/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$HOME/usr/include
 
 #### oh-my-zsh
+if [[ $SHELL == "" ]]; then
+	export SHELL="$(readlink /proc/$$/exe)"
+fi
 if [[ $SHELL == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
 	plugins=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
 fi
