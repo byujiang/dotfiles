@@ -48,6 +48,15 @@ if [[ -f $CUDA_HOME/bin/nvcc ]]; then
 	export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$CUDA_HOME/include:$CUDA_HOME/nvvm/include
 fi
 
+#### SHELL
+if [[ $SHELL == "" ]]; then
+	export SHELL="$0"
+fi
+#### oh-my-zsh
+if [[ $SHELL == "zsh" &&  -f $HOME/.oh-my-zsh/README.md ]]; then
+	plugins=( cp dnf git pip python rsync ssh-agent sudo systemd shell vim-interaction yum tmux thefuck npm node docker )
+fi
+
 ### PS1
 if [[ $(basename $SHELL) == "bash" ]]; then
 	export PS1="\[\033[1;32m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;35m\]\u@\h';fi)\[\033[1;32m\])\342\224\200(\[\033[1;31m\]\$?\[\033[1;32m\])\342\224\200(\[\033[1;36m\]\@ \d\[\033[1;32m\])\n\342\224\224[\[\033[1;33m\]\w\[\033[1;32m\]]\342\224\200\[\033[1;31m\]|> \[\033[0m\]"
