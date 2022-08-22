@@ -3,9 +3,9 @@
 
 #### system part
 export EDITOR=vim
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
+#export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
+#export LC_CTYPE=en_US.UTF-8
 # export XMODIFIERS=@im=fcitx
 
 #### clash
@@ -64,3 +64,7 @@ fi
 
 #### TERM
 export TERM='xterm'
+
+if [[ $(uname -a) =~ "microsoft" ]]; then
+	export DISPLAY=$(awk '/nameserver/ {print $2}' /etc/resolv.conf):0.0
+fi
