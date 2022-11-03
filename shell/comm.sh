@@ -10,8 +10,9 @@ export EDITOR=vim
 
 #### clash
 if [[ $(pgrep clash) != "" ]]; then
-	export all_proxy=socks://localhost:7891/
+	export all_proxy=http://localhost:7890/
 	export http_proxy=http://localhost:7890/
+	export socks_proxy=socks5://localhost:7891/
 fi
 
 if [[ -d $HOME/Workspace/rismom/analysis/python ]];then
