@@ -21,3 +21,5 @@
 
 [push]
 	default = matching
+[http "https://github.com"]
+	proxy = http://localhost:7890
